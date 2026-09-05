@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!--
+  LA PIZZERÍA DE NICK · fracciones equivalentes con grapadora
+  Prototipo v0.4 · © Andrés Asensio · CC BY-NC-SA 4.0
+
+  v0.4 · AUDITORÍA Y PUESTA AL DÍA. Lo que encontró la revisión, y lo que
+  se añade para que la pizzería vaya al paso de la ciudad:
+  · DOS PEDIDOS SE COLABAN SIN GRAPAR. El de media pizza aceptaba dos
+    cuartos SUELTOS (suman 1/2, sí, pero el cliente pidió una mitad en una
+    pieza) y el del tercio aceptaba dos sextos sueltos sin pasar la máquina.
+    En los dos, la grapadora —que es la idea de la casa— se podía saltar.
+    Ahora la meta exige la pieza grapada, y si la cantidad está pero la
+    pieza no, Nick lo dice en vez de quedarse callado.
+  · MODO ESTÁNDAR. El archivo arrancaba en <html> sin <!DOCTYPE>, y el
+    navegador lo pintaba en modo «quirks». Se ha comprobado píxel a píxel
+    que al pasar a estándar no se mueve nada.
+  · LA BARRA: «← La ciudad» (el taller del caso 2 también es de Nick), la
+    lengua y el sonido, en el mismo orden que allí.
+  · VALENCIÀ: todo texto pasa por T(); diccionario de 160 frases al final.
+    Nick trata al cliente de vosté; las pistas tutean al alumno.
+  · SONIDO de local, sintetizado: el clac de la grapadora, el silbido del
+    cortador, la tiza en la pizarra, el timbre del teléfono, dos avisos.
+  · NICK VIVE: parpadea, el brazo da el clac al grapar y salta cuando el
+    pedido sale redondo.
+  · NICK YA NO ES HUMANO: es una MORSA. En un mundo donde el jefe es un
+    dinosaurio y el listillo un pájaro, un señor con bigote desentonaba. La
+    morsa conserva justo lo que ya lo identificaba —el mostacho ancho y
+    caído, ahora vibrisas y colmillos—, así que cambia de especie sin
+    perder la cara; y sin orejas de fuera, que es lo que la separa de un
+    oso. Solo se ha tocado la cabeza y el color de las manos: cuerpo,
+    delantal, paño, brazo y grapadora siguen siendo los mismos, y con ellos
+    todas las clases que la app anima.
+  · LA CUENTA: al acabar el servicio, las seis comparaciones con su signo
+    y la regla que dejó cada una, en el tique. Lo que se copia al cuaderno.
+  · EN PAPEL (@media print): sin mandos ni sombras, pizarra clara, tique y
+    cuenta limpios.
+
+  LA IDEA. Cortar reparte; GRAPAR junta. La equivalencia deja de enunciarse y
+  pasa a ser el resultado de un gesto: junto dos cuartos contiguos y me sale
+  exactamente una mitad.
+
+  LO QUE AÑADE ESTA VERSIÓN: LA ESCALERA DE COMPARACIÓN
+  El servicio ahora tiene dos turnos. Primero se sirve —los gestos de siempre:
+  grapar, recortar, la segunda caja, el denominador común para juntar—; después
+  se COMPARA, que es el plato fuerte, y se compara en el orden en que se
+  demuestra:
+  1. MISMO DENOMINADOR (3/8 y 5/8): trozos iguales, basta contar trozos.
+  2. MISMO NUMERADOR (1/3 y 1/4): más partes tocan a menos; 1/4 < 1/3
+     aunque 4 > 3.
+  3. UN DENOMINADOR CABE EN EL OTRO (3/4 y 5/8): recortando UNA caja quedan
+     igualadas.
+  4. NI UNO CABE EN EL OTRO (2/3 y 3/5): hay que cortar LAS DOS, y en quince
+     caben los dos cortes. Ponerlas en la misma secuencia de trozos: eso es
+     el denominador común, hecho con el dedo.
+  5. IGUALES DISFRAZADOS (2/4 y 3/6): las dos marcas caen en el mismo punto;
+     comparar también puede acabar en empate.
+  6. EL ENCARGO POR TELÉFONO (7/8 contra 6/7): harían falta 56 trozos y el
+     cortador de la casa no hila tan fino. Se corta SOBRE EL PAPEL —los dos
+     numeradores nuevos son 49 = 7·7 y 48 = 8·6— y de ahí sale, demostrada y
+     no recitada, la multiplicación en cruz. El modelo se agota; la
+     definición, no.
+
+  DOS COSAS QUE NO SON DE WU
+  · LA PIZARRA DE NICK. Davydov hace escribir A > B mucho antes de saber
+    cuánto vale nada: la RELACIÓN entre magnitudes viene antes que el
+    número. Así que cada pedido comparativo abre con la pizarra: las dos
+    fracciones, un hueco en medio y tres tizas —mayor, igual, menor—. El
+    alumno se moja cuando todavía no tiene NADA con que contar, y al final
+    ve su propia apuesta aguantar o caer. La comparación deja de ser una
+    pregunta que se contesta cuando ya está todo resuelto y pasa a ser una
+    conjetura que se verifica.
+  · NICK ESCUCHA EL ERROR EN VEZ DE CORREGIRLO. Una respuesta mala casi
+    nunca es un despiste: suele ser una regla razonable aplicada donde no
+    vale —«más numerador y más denominador, más cantidad»—. Cada opción
+    falsa tiene ahora su réplica, que dice el razonamiento en voz alta y lo
+    refuta con algo que el alumno YA ha vivido: quien elige 3/5 frente a
+    2/3 oye que ese mismo argumento daba 1/4 > 1/3 dos pedidos atrás. Es de
+    Bass y Ball: tratar lo que dice el alumno como una afirmación que
+    merece ser examinada, no tachada.
+
+  LO DEMÁS QUE CAMBIA
+  · EL TIQUE YA NO SIMPLIFICA GRATIS. Antes escribía «6/8 = 3/4» sin que
+    nadie hubiera grapado nada, y eso dejaba a la grapadora sin oficio. El
+    nombre nuevo solo aparece cuando el gesto lo fabrica.
+  · LA REGLA DE DOS PEINES. Mientras las dos pizzas están cortadas distinto,
+    cada mesa dibuja sus rayas por su lado —unas desde arriba, otras desde
+    abajo, cada una de su color— y las marcas caen entre púas que no casan.
+    Cuando el corte común llega, los dos peines se funden en uno. Esa imagen
+    ES «todavía no están en la misma secuencia».
+  · EL CORTADOR AVISA. Pasar a un corte que no respeta las piezas (de cuartos
+    a quintos) destruía grapas y elección sin decir nada. Ahora esos botones
+    van punteados y piden un segundo toque.
+  · LA GRAPADORA DE MANO EXPLICA SUS SILENCIOS. Si junto 3 octavos, la pieza
+    existe pero no es 1 de nada entero: no hay división que enseñar, y ahora
+    lo dice. La INDUSTRIAL, igual: con 2 sextos elegidos y la máquina de 3
+    en 3 escribía 2/6 = 0,66…/2 —una división que no existe—; ahora calla,
+    y cuenta que esos trozos han quedado dentro de piezas enteras.
+  · ARREGLO: al volver a cortar, un trozo SUELTO elegido pasaba a tener
+    elegido solo uno de sus hijos (1/4 elegido se quedaba en 1/8 tras cortar
+    en 8), y la operación escrita decía otra cosa. Ahora la elección pasa a
+    todos los hijos y la imagen dice lo mismo que la igualdad.
+  · LA DIFERENCIA SE VE: al resolver una comparación, el hueco entre las dos
+    marcas queda rayado y con su nombre (1/15). Quién gana, y por cuánto.
+  · LO QUE LLEVAS, CAJA POR CAJA Y EN TOTAL. Con dos cajas abiertas el panel
+    enseñaba solo la caja activa —«4/4»— mientras el cliente tenía además un
+    cuarto en la otra: parecía que había respondido mal teniéndolo bien.
+    Ahora se ve la cuenta entera. Y con ella, dos honestidades: el total va
+    en FRACCIÓN y no en decimales —eso es otro curso—, y si las cajas están
+    cortadas distinto NO se suma nada ni se pone marca en la regla: primero
+    el mismo cortador. El pedido tampoco se da por bueno hasta entonces.
+  · LA UNIDAD, COMO DEBE SER: el 1 es la SUPERFICIE de una pizza de la casa,
+    no la pizza. La precisión no es manía: es Wu.
+
+  LAS DOS REGLAS QUE LA HACEN HONESTA
+  · La unidad está fijada y a la vista: todas las pizzas de la casa miden lo
+    mismo, y una entera (su superficie) es 1.
+  · Todo pedido termina en EL TIQUE, que lleva su regla. El modelo de la
+    pizza no puede ser la definición de fracción —no explica 5/4 ni compara
+    7/8 con 6/7—, así que se usa como situación de partida y se remata
+    siempre en la recta. El pedido por teléfono es, exactamente, el momento
+    en que el modelo dice hasta aquí y la recta sigue.
+-->
+<title>La pizzería de Nick</title>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Nunito:wght@400;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+:root{
+  --mesa:#F4EADA; --madera:#8A5E3B; --maderaB:#9A6A42; --carton:#C89A63;
+  --corteza:#C98A3E; --cortezaO:#A96C28; --queso:#F3DCA2;
+  --tomate:#C4462F; --tomateO:#9E3423; --albahaca:#5C7A3E;
+  --azul:#2F6E8C; --tinta:#3A2E22; --papel:#FFFDF6; --grapa:#C6CBD1;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--mesa);color:var(--tinta);font-family:Nunito,system-ui,sans-serif;
+  background-image:radial-gradient(rgba(160,130,90,.07) 1px, transparent 1px);background-size:14px 14px}
+.marco{max-width:560px;margin:0 auto;padding:0 14px 34px}
+
+/* LA BARRA DE ARRIBA. La pizzería está en la misma ciudad que los ocho
+   casos de Jeff y Liz —el taller del caso 2 es de Nick—, y desde aquí se
+   vuelve al plano. A la derecha, la lengua y el sonido: los mismos dos
+   mandos que allí, en el mismo orden. */
+.barra{display:flex;gap:8px;align-items:center;padding:10px 0 0;flex-wrap:wrap}
+/* el enlace se viste de botón: sin esto salía azul y subrayado, como un
+   enlace de 1998 en medio de una pizzería de cartón */
+.barra a.b{text-decoration:none;display:inline-block;font-family:Nunito,sans-serif;font-weight:700;
+  font-size:14px;padding:9px 13px;border-radius:10px;border:1px solid #DCCFB4;background:var(--papel);
+  color:var(--tinta);box-shadow:0 2px 0 #DCCFB4}
+.barra a.b:hover{border-color:var(--tomate)}
+.barra .etq{font-size:10.5px}
+
+/* NICK VIVE. Parpadea cada pocos segundos, da un saltito cuando el pedido
+   sale redondo y, al grapar, el brazo de la grapadora baja y sube: un
+   clac. Todo son transformaciones sobre grupos de su propio SVG. */
+.cara .ojo{transform-box:fill-box;transform-origin:center;animation:parpadea 4.4s infinite}
+@keyframes parpadea{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.cara .brazo{transform-box:fill-box;transform-origin:15% 100%}
+.voz.nick.grapando .cara .brazo{animation:clac .5s ease-in-out}
+@keyframes clac{35%{transform:rotate(22deg)}60%{transform:rotate(-4deg)}}
+.voz.nick.feliz .cara-caja svg{animation:salta .55s cubic-bezier(.3,1.5,.5,1)}
+@keyframes salta{30%{transform:translateY(-6px) rotate(-3deg)}60%{transform:translateY(1px)}}
+@media (prefers-reduced-motion: reduce){
+  .cara .ojo,.voz.nick.grapando .cara .brazo,.voz.nick.feliz .cara-caja svg{animation:none}
+}
+
+/* EL TOLDO DE LA CASA */
+.toldo{margin:0 -14px 24px;padding:16px 16px 13px;position:relative;
+  background:repeating-linear-gradient(90deg,#C4462F 0 26px,#F6EFE2 26px 52px);
+  border-bottom:5px solid #9E3423;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.toldo::after{content:'';position:absolute;left:0;right:0;bottom:-14px;height:14px;
+  background:repeating-linear-gradient(90deg,#C4462F 0 26px,#F6EFE2 26px 52px);
+  -webkit-mask:radial-gradient(circle 13px at 13px 0, transparent 98%, #000 100%) repeat-x;
+  mask:radial-gradient(circle 13px at 13px 0, transparent 98%, #000 100%) repeat-x;
+  -webkit-mask-size:26px 14px;mask-size:26px 14px}
+/* Las letras blancas sobre las rayas rojas y blancas del toldo se perdían a
+   trozos —fondo a rayas y texto claro es la peor pareja posible—. Ahora van
+   sobre una placa oscura, como el letrero colgado de un local de verdad. */
+.placa{display:inline-block;background:rgba(46,34,24,.92);border:2px solid rgba(255,255,255,.25);
+  border-radius:12px;padding:9px 16px 10px;box-shadow:0 4px 10px rgba(0,0,0,.35)}
+h1{font-family:'Bree Serif',serif;font-size:25px;margin:0;color:#F6EFE2;letter-spacing:.3px}
+.lema{font-family:'Special Elite',monospace;font-size:10.5px;letter-spacing:1px;
+  color:#E3C98F;margin-top:3px}
+
+/* EL SERVICIO: un punto por pedido. Los redondos se SIRVEN; los rombos se
+   COMPARAN. Que el propio camino diga que la casa tiene dos oficios. */
+.pasos{display:flex;gap:7px;justify-content:center;align-items:center;margin:0 0 14px}
+.pasos i{width:8px;height:8px;border-radius:50%;border:2px solid #D3C6AC;background:transparent;
+  transition:transform .2s,background .2s}
+.pasos i.vs{border-radius:2px;transform:rotate(45deg)}
+.pasos i.hecho{background:var(--albahaca);border-color:var(--albahaca)}
+.pasos i.actual{border-color:var(--tomate);transform:scale(1.3)}
+.pasos i.vs.actual{transform:rotate(45deg) scale(1.3)}
+
+/* LA CHARLA */
+.charla{display:flex;flex-direction:column;gap:8px;margin:0 0 12px}
+.voz{background:var(--papel);border:1px solid #E7DCC4;border-radius:12px;padding:10px 13px 11px;
+  box-shadow:0 2px 5px rgba(0,0,0,.06);font-size:15px;line-height:1.45;
+  animation:llega .22s ease-out}
+@keyframes llega{from{opacity:0;transform:translateY(4px)}}
+@media (prefers-reduced-motion: reduce){ .voz{animation:none} }
+.voz .quien{font-family:'Bree Serif',serif;font-size:12.5px;letter-spacing:.5px;margin-bottom:2px}
+.voz.cliente{border-left:5px solid var(--tomate)} .voz.cliente .quien{color:var(--tomate)}
+.voz.nick{border-left:5px solid var(--albahaca);background:#FBF9EF;position:relative;padding-left:74px;min-height:78px}
+.voz.nick .quien{color:var(--albahaca)}
+.cara-caja{position:absolute;left:8px;top:8px;width:56px}
+.cara-caja svg{width:56px;height:auto;display:block}
+@media (max-width:380px){ .voz.nick{padding-left:62px} .cara-caja{width:46px} .cara-caja svg{width:46px} }
+/* Nick tiene dos bocas: la del oficio y la de cuando el pedido sale redondo. */
+.cara-caja .boca-f{display:none}
+.voz.nick.feliz .boca{display:none}
+.voz.nick.feliz .boca-f{display:block}
+.pista{font-family:'Special Elite',monospace;font-size:11.5px;color:#9A8A70;letter-spacing:.5px;
+  padding-left:4px}
+
+/* LA MESA Y LAS CAJAS */
+.mesa{background:repeating-linear-gradient(94deg,var(--maderaB) 0 30px,var(--madera) 30px 60px);
+  border-radius:16px;padding:12px;box-shadow:inset 0 0 0 4px #6E4A2E, 0 4px 10px rgba(0,0,0,.15);
+  display:flex;gap:10px;justify-content:center;align-items:flex-start}
+.caja{flex:1;max-width:252px;background:var(--carton);border-radius:10px;padding:7px;
+  box-shadow:inset 0 0 0 2px #A87C48, 0 3px 6px rgba(0,0,0,.25);cursor:pointer;transition:box-shadow .15s}
+.caja.activa{box-shadow:inset 0 0 0 3px #F3DCA2, 0 0 0 3px var(--tomate), 0 4px 10px rgba(0,0,0,.3)}
+.caja .tapa{font-family:'Special Elite',monospace;font-size:9.5px;letter-spacing:1px;color:#6E4A2E;
+  text-align:center;margin-bottom:3px}
+/* En las comparaciones cada caja es de una mesa, y lo lleva puesto: una
+   cinta del color de su marca en la regla. Caja, mesa y marca, atadas. */
+.caja.mA{border-top:5px solid var(--tomate)} .caja.mA .tapa{color:var(--tomateO)}
+.caja.mB{border-top:5px solid var(--azul)}  .caja.mB .tapa{color:var(--azul)}
+/* el resalte de «caja activa» debe ser del color de SU mesa: si no, la caja
+   de la mesa 7 se resalta en rojo y el vínculo caja↔mesa↔marca se rompe */
+.caja.mB.activa{box-shadow:inset 0 0 0 3px #F3DCA2, 0 0 0 3px var(--azul), 0 4px 10px rgba(0,0,0,.3)}
+svg.pizza{display:block;width:100%;height:auto;touch-action:manipulation}
+.corte{cursor:pointer;transition:transform .14s ease-out}
+/* Antes, elegir un trozo solo cambiaba el color del borde, y con esta paleta
+   —todo tostado— apenas se notaba. Ahora la porción elegida SE SEPARA de la
+   pizza, como cuando la levantas de la caja, y las demás se apagan un poco.
+   El gesto se ve de un vistazo desde el fondo del aula. */
+.corte.apagada{opacity:.55}
+.corte.elegida{filter:drop-shadow(0 4px 5px rgba(60,40,20,.45))}
+/* Las grapas se ven y se van, EN ESTE ORDEN: primero el corte y las grapas
+   juntos —así se entiende qué se une—, luego se va el corte, y al final las
+   grapas, que dejan la porción limpia. Y solo brillan las juntas NUEVAS. */
+.grapa-nueva{animation:seva 2.6s ease-out forwards;transform-box:view-box}
+.costura-nueva{animation:seCose 2.6s ease-out forwards}
+@keyframes seva{0%{opacity:0;transform:scale(1.7)}8%{opacity:1;transform:scale(1)}82%{opacity:1}100%{opacity:0}}
+@keyframes seCose{0%{opacity:0}8%{opacity:.85}48%{opacity:.85}66%{opacity:0}100%{opacity:0}}
+
+/* LO QUE HA PASADO: la operación escrita como en el cuaderno. Cortar en c
+   multiplica arriba y abajo por c; grapar de c en c los divide. Las flechas
+   son las mismas que se dibujan en la pizarra, y ahora salen solas cuando el
+   alumno hace el gesto en la pizza: primero el gesto, después el símbolo. */
+.opera{background:var(--papel);border:1px solid #E7DCC4;border-radius:12px;margin-top:12px;
+  padding:8px 10px 4px;box-shadow:0 2px 5px rgba(0,0,0,.06)}
+.opera .rot{font-family:'Special Elite',monospace;font-size:10.5px;letter-spacing:2px;
+  color:#9A8A70;text-align:center;margin-bottom:2px}
+.opera svg{display:block;width:100%;max-width:330px;margin:0 auto;height:auto}
+.opera .frase{font-size:12.5px;color:#7A6A52;text-align:center;margin:2px 0 4px}
+
+/* MANDOS */
+.fila{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin:12px 0 0}
+.etq{font-size:11.5px;letter-spacing:1.2px;text-transform:uppercase;color:#9A8A70;font-weight:700}
+button.b{font-family:Nunito,sans-serif;font-weight:700;font-size:14px;padding:9px 13px;border-radius:10px;
+  border:1px solid #DCCFB4;background:var(--papel);color:var(--tinta);cursor:pointer;box-shadow:0 2px 0 #DCCFB4}
+button.b:active{transform:translateY(1px);box-shadow:0 1px 0 #DCCFB4}
+button.b[aria-pressed="true"]{background:var(--tomate);color:#fff;border-color:var(--tomateO);
+  box-shadow:0 2px 0 var(--tomateO)}
+button.b.acc{background:var(--tomate);color:#fff;border-color:var(--tomateO);box-shadow:0 2px 0 var(--tomateO)}
+button.b.verde{background:var(--albahaca);color:#fff;border-color:#46602F;box-shadow:0 2px 0 #46602F}
+/* Los cortes que NO respetan las piezas van punteados, como lo que está por
+   coser: se puede, pero se pierde lo grapado. El primer toque avisa; el
+   segundo, corta. */
+button.b.rompe{border-style:dashed;border-color:#C98F7B;color:#9E3423;background:#FFF8F2;
+  box-shadow:0 2px 0 #E9C9BB}
+button.b.avisa{background:#C87A28;color:#fff;border-color:#9A5C1B;border-style:solid;
+  box-shadow:0 2px 0 #9A5C1B;animation:tiembla .28s}
+@keyframes tiembla{25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+
+/* LA PIZARRA DE NICK. Antes de cortar nada, el signo. Que el alumno se moje
+   cuando todavía no puede contar: eso convierte la comparación en una
+   conjetura que se verifica —y da valor al fallo, porque se ve caer la
+   propia apuesta— en vez de una pregunta que se contesta cuando ya está
+   todo resuelto y no queda nada que pensar. */
+.pizarra{margin-top:12px;background:#2E4034;border:7px solid #6E4A2E;border-radius:8px;
+  padding:11px 12px 13px;box-shadow:inset 0 0 26px rgba(0,0,0,.45), 0 3px 8px rgba(0,0,0,.2);
+  text-align:center}
+.pizarra .rot{font-family:'Special Elite',monospace;font-size:10px;letter-spacing:2px;
+  color:#8FA894;margin-bottom:7px}
+.pizarra .linea{font-family:'Bree Serif',serif;font-size:21px;color:#EFF3EA;
+  display:flex;gap:11px;align-items:center;justify-content:center;flex-wrap:wrap}
+.pizarra .hueco-signo{display:inline-block;min-width:44px;padding:1px 8px;border-radius:5px;
+  border:2px dashed #7E9686;color:#8FA894}
+.pizarra .signo{display:inline-block;min-width:44px;font-size:26px;color:#F7E9A0}
+.pizarra .apuesta{font-family:'Special Elite',monospace;font-size:10.5px;letter-spacing:1px;
+  color:#8FA894;margin-top:7px}
+.pizarra .fA{color:#F0A79A} .pizarra .fB{color:#9FD0E6}
+.pizarra .bots{display:flex;gap:8px;justify-content:center;margin-top:10px}
+.pizarra .bots button{font-family:'Bree Serif',serif;font-size:20px;width:52px;padding:5px 0;
+  border-radius:8px;border:2px solid #7E9686;background:rgba(255,255,255,.07);color:#EFF3EA;
+  cursor:pointer}
+.pizarra .bots button:active{background:rgba(255,255,255,.2)}
+
+/* EL TIQUE */
+.tique{background:var(--papel);padding:14px 15px 16px;margin-top:16px;box-shadow:0 3px 9px rgba(0,0,0,.10);
+  -webkit-mask:radial-gradient(circle 6px at 6px 0, transparent 98%, #000 100%) repeat-x top / 12px 6px,
+        radial-gradient(circle 6px at 6px 6px, transparent 98%, #000 100%) repeat-x bottom / 12px 6px,
+        linear-gradient(#000,#000) no-repeat center / 100% calc(100% - 12px);
+  mask:radial-gradient(circle 6px at 6px 0, transparent 98%, #000 100%) repeat-x top / 12px 6px,
+        radial-gradient(circle 6px at 6px 6px, transparent 98%, #000 100%) repeat-x bottom / 12px 6px,
+        linear-gradient(#000,#000) no-repeat center / 100% calc(100% - 12px)}
+.tique h2{font-family:'Special Elite',monospace;font-size:12.5px;margin:0 0 9px;letter-spacing:3px;
+  color:#9A8A70;text-align:center}
+.lectura{font-size:15.5px;margin:0 0 3px;text-align:center}
+.lectura b{font-family:'Bree Serif',serif;font-size:22px;color:var(--tomate)}
+.desglose{font-size:12.5px;color:#9A8A70;text-align:center;margin:0 0 8px;min-height:18px}
+.regla{position:relative;height:60px;margin-top:4px}
+.cinta{position:absolute;left:0;right:0;top:20px;height:24px;border-radius:2px;
+  background:linear-gradient(180deg,#F3EAD3,#E4D8B8);border:1px solid #C9BB9E}
+.cinta b{position:absolute;top:26px;font-size:11px;color:#6E6250;transform:translateX(-50%);font-weight:700}
+.marca{position:absolute;top:0;transform:translateX(-50%);text-align:center;pointer-events:none}
+.marca em{display:block;width:3px;height:42px;margin:0 auto;background:var(--tomate);border-radius:2px}
+.marca u{display:block;font-family:'Bree Serif',serif;font-size:12.5px;color:var(--tomate);text-decoration:none}
+.marca.dos em{background:var(--azul)} .marca.dos u{color:var(--azul)}
+/* EL HUECO: al resolver una comparación, lo que separa a las dos marcas se
+   raya y se nombra. No solo quién gana: por cuánto. */
+.hueco{position:absolute;top:0;height:24px;
+  background:repeating-linear-gradient(45deg,rgba(196,70,47,.30) 0 4px,rgba(196,70,47,.07) 4px 8px)}
+.hueco span{position:absolute;left:50%;top:-17px;transform:translateX(-50%);
+  font-family:'Bree Serif',serif;font-size:11px;color:var(--tomateO);background:var(--papel);
+  padding:0 5px;border-radius:7px;border:1px solid #E7DCC4;white-space:nowrap}
+.nota{font-size:12px;color:#9A8A70;margin:12px 0 0;line-height:1.5;text-align:center}
+
+/* LA CUENTA. Al terminar el servicio, Nick pasa la cuenta: las seis
+   comparaciones, cada una con su signo y con lo que enseñó. Es el
+   equivalente del acta de la ciudad —lo que queda en papel de una
+   sesión— y por eso va en el mismo tique y sale limpia impresa. */
+.cuenta{margin-top:16px}
+.cuenta ol{list-style:none;margin:0;padding:0}
+.cuenta li{display:grid;grid-template-columns:24px 1fr;gap:4px 10px;padding:8px 0;
+  border-bottom:1px dashed #E7DCC4;align-items:start}
+.cuenta li .n{font-family:'Special Elite',monospace;font-size:15px;color:#9A8A70;padding-top:2px}
+.cuenta li .linea{font-family:'Bree Serif',serif;font-size:18px;color:var(--tinta)}
+.cuenta li .linea .fA{color:var(--tomate)} .cuenta li .linea .fB{color:var(--azul)}
+.cuenta li .regla-txt{font-size:12.5px;color:#7A6A52;line-height:1.45}
+.cuenta .total{font-family:'Special Elite',monospace;font-size:11px;letter-spacing:2px;
+  color:#9A8A70;text-align:center;margin-top:12px}
+
+/* EN PAPEL. La pizzería ya es de color de papel: basta quitar sombras y
+   mandos, aclarar la pizarra y dejar el tique y la cuenta. */
+@media print{
+  body{background:#fff}
+  .barra,.fila,.pasos,.pista{display:none !important}
+  .toldo{box-shadow:none;border-bottom:2px solid #9E3423;background:#fff}
+  .toldo::after{display:none}
+  .placa{background:#fff;border-color:#9E3423;box-shadow:none}
+  h1{color:#3A2E22} .lema{color:#7A6A52}
+  .mesa,.caja,.voz,.opera,.tique{box-shadow:none}
+  .pizarra{background:#F4F1E6;border-color:#B9AC8E;box-shadow:none}
+  .pizarra .linea,.pizarra .signo{color:#3A2E22} .pizarra .rot,.pizarra .apuesta{color:#7A6A52}
+  .pizarra .fA{color:var(--tomate)} .pizarra .fB{color:var(--azul)}
+  .tique{-webkit-mask:none;mask:none;border:1px dashed #C9BB9E}
+}
+</style></head><body>
+<div class="marco">
+  <div class="barra">
+    <a class="b" href="https://diazepamina-creator.github.io/numeros-partidos/" data-t>← La ciudad</a>
+    <span style="flex:1"></span>
+    <button class="b" id="lengua" lang="ca">Valencià</button>
+    <button class="b" id="sonido">Sonido: sí</button>
+  </div>
+  <div class="toldo">
+    <div class="placa">
+      <h1>La pizzería de Nick</h1>
+      <div class="lema" data-t>TODAS LAS PIZZAS DE LA CASA MIDEN LO MISMO · UNA ENTERA = 1</div>
+    </div>
+  </div>
+
+  <div class="pasos" id="pasos"></div>
+  <div class="charla" id="charla"></div>
+  <div class="mesa" id="mesa"></div>
+
+  <div id="opera"></div>
+  <div id="pizarra"></div>
+
+  <div class="fila" id="filaCortes"><span class="etq" data-t>cortar en</span><span id="botCortes"></span></div>
+  <div class="fila" id="filaInd">
+    <span class="etq" data-t>grapar toda la pizza</span><span id="botIndustrial"></span>
+  </div>
+  <div class="fila" id="filaBotones">
+    <button class="b acc" id="bGrapar" data-t>Grapar lo elegido</button>
+    <button class="b" id="bSoltar" data-t>Quitar grapas</button>
+    <button class="b" id="bLimpiar" data-t>Empezar de nuevo</button>
+  </div>
+  <div class="fila" id="filaResp"></div>
+
+  <div class="tique">
+    <h2 data-t>TIQUE</h2>
+    <p class="lectura" id="lec">—</p>
+    <p class="desglose" id="desglose"></p>
+    <div class="regla"><div class="cinta" id="cinta"></div><div id="marcas"></div></div>
+    <p class="nota" data-t>El 1 es la superficie de una pizza entera de la casa.<br>La pizza es el envase; el número vive en la regla.</p>
+    <div class="cuenta" id="cuenta"></div>
+  </div>
+</div>
+
+<script>
+/* ── LA LENGUA. Igual que en la ciudad: todo texto que se pinta pasa por
+   T(); en castellano devuelve lo que recibe y en valenciano lo busca en el
+   diccionario VA del final del archivo. Los textos escritos en el HTML se
+   traducen por su HTML entero, normalizado, y guardan su castellano en
+   data-es. ── */
+let idioma = 'es';
+const VA = {};
+function T(s){ return idioma === 'va' && VA[s] !== undefined ? VA[s] : s; }
+const norma = h => h.replace(/\s+/g, ' ').trim();
+function traduce(){
+  document.querySelectorAll('[data-t]').forEach(el => {
+    if(el.dataset.es === undefined) el.dataset.es = el.innerHTML;
+    const k = norma(el.dataset.es);
+    el.innerHTML = (idioma === 'va' && VA[k] !== undefined) ? VA[k] : el.dataset.es;
+  });
+  document.documentElement.lang = idioma === 'va' ? 'ca-ES-valencia' : 'es';
+}
+
+/* ── EL SONIDO DEL LOCAL. Sintetizado al vuelo, sin archivos: el clac de la
+   grapadora, el silbido del cortador, la tiza en la pizarra, el timbre del
+   teléfono y dos avisos. Se crea al primer toque y el botón lo apaga. ── */
+const Ruido = (() => {
+  let ctx = null, buf = null, on = true;
+  function ac(){
+    if(ctx) return ctx;
+    try{ ctx = new (window.AudioContext || window.webkitAudioContext)(); }catch(e){ return null; }
+    buf = ctx.createBuffer(1, ctx.sampleRate * .3, ctx.sampleRate);
+    const d = buf.getChannelData(0); for(let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    return ctx;
+  }
+  function rafaga(f, dur, vol, q, t){
+    const c = ac(); if(!c) return;
+    const src = c.createBufferSource(); src.buffer = buf;
+    const fl = c.createBiquadFilter(); fl.type = 'bandpass'; fl.frequency.value = f; fl.Q.value = q || 1.2;
+    const g = c.createGain(); const t0 = c.currentTime + (t || 0);
+    g.gain.setValueAtTime(vol, t0); g.gain.exponentialRampToValueAtTime(.0001, t0 + dur);
+    src.connect(fl); fl.connect(g); g.connect(c.destination); src.start(t0); src.stop(t0 + dur + .02);
+  }
+  function tono(f, dur, vol, tipo, t){
+    const c = ac(); if(!c) return;
+    const o = c.createOscillator(); o.type = tipo || 'sine'; o.frequency.value = f;
+    const g = c.createGain(); const t0 = c.currentTime + (t || 0);
+    g.gain.setValueAtTime(.0001, t0); g.gain.exponentialRampToValueAtTime(vol, t0 + .01);
+    g.gain.exponentialRampToValueAtTime(.0001, t0 + dur);
+    o.connect(g); g.connect(c.destination); o.start(t0); o.stop(t0 + dur + .02);
+  }
+  return {
+    get on(){ return on; }, set on(v){ on = v; if(v) ac(); },
+    despierta(){ if(on){ const c = ac(); if(c && c.state === 'suspended') c.resume(); } },
+    grapa(){ if(on){ rafaga(1400, .05, .3, 1.2); rafaga(600, .08, .25, 1, .04); } },
+    corte(){ if(on){ rafaga(3200, .12, .14, .8); rafaga(4200, .08, .08, .8, .05); } },
+    tiza(){ if(on){ rafaga(2400, .05, .12, 2); } },
+    timbre(){ if(on){ for(let k = 0; k < 6; k++) tono(k % 2 ? 1180 : 980, .07, .07, 'square', k * .08); } },
+    bien(){ if(on){ tono(659, .18, .12, 'triangle'); tono(988, .26, .1, 'triangle', .11); } },
+    mal(){ if(on){ tono(140, .22, .16, 'square'); } }
+  };
+})();
+
+const NS = 'http://www.w3.org/2000/svg';
+const NICK = `<svg viewBox="0 -12 78 108" class="cara"><!-- NICK, EL PIZZERO. Antes era un
+  monigote de frente, todo simetría: no decía nada. Ahora está EN ESCENA —de
+  tres cuartos, con la grapadora en alto y la otra mano en la cadera—, y lleva
+  lo que lleva un pizzero de verdad: gorro ladeado, bigote de manillar, cejas
+  espesas, delantal con la harina del día y el paño al hombro. Los volúmenes
+  van con dos tonos, como los edificios de la ciudad. -->
+  <ellipse cx="39" cy="92" rx="26" ry="3.6" fill="rgba(60,40,20,.22)"/>
+
+  <!-- cuerpo, de tres cuartos -->
+  <path d="M12 92 Q12 64 26 57.5 L52 57.5 Q66 64 66 92 Z" fill="#F6EFE2" stroke="#3A2E22" stroke-width="1.7" stroke-linejoin="round"/>
+  <path d="M52 57.5 Q66 64 66 92 L54 92 Q56 70 48 60 Z" fill="#DFD6C2" stroke="#3A2E22" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- delantal -->
+  <path d="M24 66 L54 66 Q56 82 53 92 L27 92 Q23 80 24 66 Z" fill="#C4462F" stroke="#3A2E22" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M24 66 Q39 71 54 66" stroke="#9E3423" stroke-width="2" fill="none"/>
+  <g fill="#E8B08F" opacity=".55"><circle cx="32" cy="78" r="2.4"/><circle cx="45" cy="84" r="1.8"/>
+    <circle cx="38" cy="88" r="1.4"/></g>
+  <!-- paño al hombro -->
+  <path d="M50 58 Q60 56 63 63 Q57 64 54 70 Z" fill="#EFE6D2" stroke="#3A2E22" stroke-width="1.4" stroke-linejoin="round"/>
+
+  <!-- brazo izquierdo en jarras -->
+  <path d="M24 66 Q14 72 16 84" stroke="#3A2E22" stroke-width="7.5" fill="none" stroke-linecap="round"/>
+  <path d="M24 66 Q14 72 16 84" stroke="#F6EFE2" stroke-width="5.4" fill="none" stroke-linecap="round"/>
+  <circle cx="17" cy="85" r="4" fill="#C9A17C" stroke="#3A2E22" stroke-width="1.4"/>
+  <!-- brazo derecho, en alto con la grapadora (en grupo: es el que da el clac) -->
+  <g class="brazo">
+  <path d="M54 64 Q66 58 68 46" stroke="#3A2E22" stroke-width="7.5" fill="none" stroke-linecap="round"/>
+  <path d="M54 64 Q66 58 68 46" stroke="#F6EFE2" stroke-width="5.4" fill="none" stroke-linecap="round"/>
+  <circle cx="68.5" cy="44" r="4.2" fill="#C9A17C" stroke="#3A2E22" stroke-width="1.4"/>
+  <g transform="translate(59 32) rotate(-18)">
+    <rect x="0" y="0" width="19" height="6.5" rx="2.2" fill="#9AA2AC" stroke="#3A2E22" stroke-width="1.3"/>
+    <rect x="1.5" y="6" width="16" height="4.4" rx="1.6" fill="#6E7680" stroke="#3A2E22" stroke-width="1.2"/>
+    <rect x="3" y="1.4" width="9" height="2" rx="1" fill="#C6CBD1"/>
+  </g>
+  </g>
+
+  <!-- cuello -->
+  <path d="M32.6 44 Q33.2 52 31.4 58.5 L45 58.5 Q43.2 52 43.8 44 Z"
+        fill="#C9A17C" stroke="#3A2E22" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M32.6 44 Q33.2 52 31.4 58.5 L36.6 58.5 Q35.8 52 36.2 44 Z" fill="#B08A6A"/>
+  <path d="M27.4 55 L38.2 65.5 L49 55 L52.4 57 L38.2 67.5 L24 57 Z"
+        fill="#FBF7EE" stroke="#3A2E22" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M38.2 65.5 L49 55 L52.4 57 L38.2 67.5 Z" fill="#E6DDC9"/>
+
+<g transform="translate(38 46) scale(1.18) translate(-38 -46)">  <!-- LA CABEZA. Lo que de verdad ablanda un dibujo no es ningún rasgo
+       suelto: es la PROPORCIÓN. Esta cabeza va un 18 % más grande sobre el
+       mismo cuerpo, y con eso sola la morsa pasa de adulta a cachorro. Lo
+       demás acompaña: trazo marrón cálido en vez de casi negro —la línea
+       dura es la mitad de la dureza—, colmillos reducidos a dos puntas
+       mínimas, hocico más estrecho y nariz rosa. Sigue siendo una morsa:
+       el mostacho ancho que ya identificaba a Nick son las vibrisas.
+       (El lienzo crece por arriba, a −12, o el gorro se salía.)
+  ANTIGUA NOTA. Nick es una morsa, y la primera salió con cara de portero
+       de discoteca: cejas gruesas cerradas hacia dentro, ojos pequeños y
+       colmillos largos. Lo que ablanda a un bicho dibujado son cuatro
+       cosas, y están todas aquí: OJOS GRANDES y altos —con su brillo—,
+       CEJAS levantadas en vez de fruncidas, HOCICO redondo y COLMILLOS
+       cortos y romos, más dientes de leche que armas. Más los mofletes
+       colorados y un pelaje un punto más claro. Sigue siendo morsa: el
+       mostacho ancho que ya identificaba a Nick son las vibrisas. -->
+  <ellipse cx="38" cy="34.5" rx="16.5" ry="15" fill="#D3AC88" stroke="#6B4A32" stroke-width="1.7"/>
+  <path d="M23.5 32 Q25 44 30.5 48.5 Q26.5 42 26 31 Z" fill="#B08A6A"/>
+  <!-- gorro, ladeado (el de siempre) -->
+  <g transform="rotate(-7 38 20) translate(0 -2.5)">
+    <path d="M22 24 Q20 6 38 6.5 Q56 6 54 24 Z" fill="#FBF7EE" stroke="#3A2E22" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M25 12 Q30 3 38 5 Q46 3 51 12 Q44 8 38 9.5 Q32 8 25 12 Z" fill="#FFFFFF" opacity=".8"/>
+    <rect x="21" y="22.5" width="34" height="6" rx="2.4" fill="#EDE6D6" stroke="#3A2E22" stroke-width="1.5"/>
+  </g>
+  <!-- mofletes -->
+  <ellipse cx="25" cy="39.5" rx="4.2" ry="2.8" fill="#E39A88" opacity=".5"/>
+  <ellipse cx="51" cy="39.5" rx="4.2" ry="2.8" fill="#E39A88" opacity=".5"/>
+  <!-- sin cejas: con el ala del gorro tan baja no había sitio, y apretadas
+       contra ella volvían a leerse como ceño fruncido. Un bicho dulce se
+       apaña con los ojos. -->
+  <!-- ojos grandes, con brillo -->
+  <ellipse cx="31.8" cy="34.4" rx="4.3" ry="4.6" fill="#FBF7EE" stroke="#6B4A32" stroke-width="1.3"/>
+  <ellipse cx="44.2" cy="34.4" rx="4.3" ry="4.6" fill="#FBF7EE" stroke="#6B4A32" stroke-width="1.3"/>
+  <circle class="ojo" cx="32.5" cy="35" r="2.7" fill="#241C14"/>
+  <circle class="ojo" cx="44.9" cy="35" r="2.7" fill="#241C14"/>
+  <circle cx="31.3" cy="33.6" r="1.15" fill="#fff"/><circle cx="43.7" cy="33.6" r="1.15" fill="#fff"/>
+  <circle cx="33.7" cy="36.4" r=".55" fill="#fff" opacity=".8"/>
+  <circle cx="46.1" cy="36.4" r=".55" fill="#fff" opacity=".8"/>
+  <!-- el hocico, redondo y en dos lóbulos -->
+  <path d="M29.6 42.4 Q29.2 49.6 34 50.2 Q38 50.6 38 48 Q38 50.6 42 50.2
+           Q46.8 49.6 46.4 42.4 Q42.6 40.2 38 40.4 Q33.4 40.2 29.6 42.4 Z"
+        fill="#EBD2B8" stroke="#6B4A32" stroke-width="1.4" stroke-linejoin="round"/>
+  <path d="M38 40 V51.3" stroke="#C39F7E" stroke-width="1.1" opacity=".8"/>
+  <!-- la nariz, rosa y redondeada: la pieza que más ablanda un hocico -->
+  <path d="M35.4 41 Q38 39.9 40.6 41 Q40.2 44.4 38 45.4 Q35.8 44.4 35.4 41 Z"
+        fill="#E39A88" stroke="#B9705F" stroke-width=".9" stroke-linejoin="round"/>
+  <ellipse cx="36.8" cy="41.6" rx=".6" ry=".45" fill="#fff" opacity=".7"/>
+  <!-- vibrisas: cortas y finas, que no hagan de bigote de villano -->
+  <g stroke="#F2E8D6" stroke-width=".9" stroke-linecap="round" opacity=".85">
+    <path d="M29.6 45 Q24.5 44.2 22.5 45.6"/><path d="M30.2 47.8 Q25.4 48.4 23.4 50"/>
+    <path d="M46.4 45 Q51.5 44.2 53.5 45.6"/><path d="M45.8 47.8 Q50.6 48.4 52.6 50"/>
+  </g>
+  <g fill="#B08A6A" opacity=".55">
+    <circle cx="31.4" cy="45.4" r=".7"/><circle cx="32.4" cy="48" r=".7"/>
+    <circle cx="44.6" cy="45.4" r=".7"/><circle cx="43.6" cy="48" r=".7"/>
+  </g>
+  <!-- colmillos cortos y romos: se ven, pero no muerden -->
+  <path d="M34.4 50.2 Q34.3 52 35.3 52.5 Q36.1 51.9 36 50 Z"
+        fill="#F6EEDC" stroke="#6B4A32" stroke-width="1" stroke-linejoin="round"/>
+  <path d="M41.6 50.2 Q41.7 52 40.7 52.5 Q39.9 51.9 40 50 Z"
+        fill="#F6EEDC" stroke="#6B4A32" stroke-width="1" stroke-linejoin="round"/>
+  <!-- las dos bocas: la de diario y la del pedido redondo -->
+  <path class="boca" d="M36.2 48.4 Q38 49.6 39.8 48.4" stroke="#8E5A44" stroke-width="1.4"
+        fill="none" stroke-linecap="round"/>
+  <path class="boca-f" d="M35 47.4 Q38 52.2 41 47.4 Q38 49.2 35 47.4 Z"
+        fill="#8E5A44" stroke="#8E5A44" stroke-width="1.1" stroke-linejoin="round"/>
+</g></svg>`;
+const casi = (a, b) => Math.abs(a - b) < 1e-9;
+
+/* ── ESTADO. Cada CAJA lleva su pizza: en cuántas partes está cortada, qué
+      juntas están grapadas, qué piezas ha elegido el cliente y cuáles son
+      las grapas recién puestas (solo esas se animan).                    */
+let cajas = [], activa = 0, pedido = 0;
+let resuelto = false;   // la comparación del pedido ya está contestada
+let papel = false;      // el encargo por teléfono ya se ha cortado sobre el papel
+let armado = null;      // {caja, n}: corte destructivo avisado, a un toque de caer
+const nuevaCaja = c => ({cortes:c, grapas:new Array(c).fill(false), sel:new Set(), recien:new Set()});
+
+const fVal = f => f[0] / f[1];
+const fTxt = f => f[0] + '/' + f[1];
+const azul = t => '<b style="color:var(--azul)">' + t + '</b>';
+
+/* ── LOS PEDIDOS. Primero se SIRVE (los gestos); después se COMPARA (la
+      escalera, en el orden en que se demuestra). Cada pedido comparativo
+      lleva sus dos fracciones, sus mesas y su carta de cortes; con eso, la
+      pregunta y la respuesta buena se fabrican solas.                    */
+const PEDIDOS = [
+ /* ── TURNO 1 · SE SIRVE ─────────────────────────────────────────────── */
+ {cajas:[4],
+  cli:'—Perdone… yo la quería <b>en mitades</b>, no en cuartos. ¿Y ahora qué me llevo?',
+  nick:'—Que es lo mismo, hombre. Espere, que saco la grapadora.',
+  pista:'Toca dos cuartos PEGADOS y dale a Grapar.',
+  /* El pedido es MEDIA pizza en UNA pieza: dos cuartos sueltos suman lo
+     mismo, pero el cliente no pidió una suma, pidió una mitad. Así que la
+     meta exige la pieza grapada; si no, la grapadora no tenía oficio. */
+  objetivo: 1/2,
+  meta: (v, cs) => casi(v, 1/2) && grupos(cs[0]).some(t => t.length === 2 && cs[0].sel.has(t[0])),
+  sinGrapa:'Suman media, sí. Pero el cliente quiere UNA pieza: grápalas.',
+  ok:'—Ah, pues sí que es media. Dos cuartos grapados ocupan lo mismo que una mitad: '
+    +'<b>2/4 y 1/2 son la misma cantidad</b>. Y mire la regla: la marca no se ha movido.'},
+
+ {cajas:[4],
+  cli:'—Yo quiero <b>tres octavos</b>. Y no me diga que no, que lo pone en la carta.',
+  nick:'—Está cortada en cuartos, pero el cortador vuelve a pasar cuando haga falta. '
+      +'Lo que esté grapado, aguanta.',
+  pista:'Vuelve a cortar en 8 y quédate con tres trozos.',
+  meta: v => casi(v, 3/8),
+  ok:'—Tres de ocho, ni uno más. Y fíjese: al cortar más fino, lo que ya estaba grapado '
+    +'<b>no se ha movido de sitio</b>, solo ha cambiado de nombre.'},
+
+ {cajas:[4,4],
+  cli:'—Somos cinco. Póngame <b>cinco cuartos</b>… si es que eso existe.',
+  nick:'—Existe, pero no cabe en una caja. Traigo otra.',
+  pista:'Una pizza entera Y un cuarto de la segunda: usa las dos cajas.',
+  meta: v => casi(v, 5/4),
+  ok:'—Claro que existe: una pizza entera y un cuarto. Cuando el de arriba pasa al de abajo '
+    +'hace falta <b>más de una unidad</b>, y en la regla se ve pasado el 1.'},
+
+ {cajas:[6],
+  cli:'—Un <b>tercio</b> de pizza, por favor. Pero la veo cortada en seis…',
+  nick:'—Seis sextos, sí. Grapo de dos en dos y le quedan tercios; es la máquina '
+      +'grande, la que pasa por toda la pizza.',
+  pista:'Usa la grapadora industrial DE 2 EN 2 y coge una pieza.',
+  /* lo mismo: dos sextos sueltos son 2/6, no un tercio en una pieza */
+  objetivo: 1/3,
+  meta: (v, cs) => casi(v, 1/3) && grupos(cs[0]).some(t => t.length === 2 && cs[0].sel.has(t[0])),
+  sinGrapa:'Dos sextos sueltos suman lo mismo, pero un tercio es UNA pieza: grapa de 2 en 2.',
+  ok:'—Un tercio. Y fíjese en lo que ha pasado: grapando de dos en dos, 2/6 se ha '
+    +'convertido en 1/3. <b>Ha dividido arriba y abajo entre 2</b>.'},
+
+ {cajas:[4,4],
+  cli:'—Quiero <b>media pizza y un cuarto</b>. Todo junto, en una pieza si puede ser.',
+  nick:'—Media y un cuarto no se grapan: no son del mismo tamaño. Ponga las dos en '
+      +'cuartos y verá qué fácil.',
+  pista:'Media pizza son dos cuartos: junta tres cuartos en total.',
+  meta: v => casi(v, 3/4),
+  ok:'—Tres cuartos. Para juntar dos trozos hay que <b>cortarlos igual</b> primero: '
+    +'eso de buscar el mismo denominador no es un capricho, es poder graparlos.'},
+
+ /* ── TURNO 2 · SE COMPARA: LA ESCALERA ──────────────────────────────── */
+ /* Peldaño 1: mismo denominador. Trozos iguales, basta contar trozos.   */
+ {compara:true, cajas:[8,8], fA:[3,8], fB:[5,8], menu:[2,4,8],
+  cli:'—Mesa 4 quiere <b>tres octavos</b>; mesa 7, ' + azul('cinco octavos')
+     +'. ¿Quién se lleva más?',
+  nick:'—Las dos cajas ya vienen en octavos: trozos IGUALES. Prepárelos y esto se cuenta solo.',
+  pista:'Prepara 3/8 para la mesa 4 y 5/8 para la mesa 7.',
+  ok:'—Mesa 7, y de calle: cinco octavos contra tres. Con trozos iguales <b>basta contar '
+    +'los trozos</b>, y en la regla se ve la diferencia: dos octavos.',
+  rep:{A:'—¿Tres trozos más que cinco? Son octavos los dos, del mismo tamaño exacto. '
+        +'Ahí no hay discusión posible: gana quien tenga más trozos.',
+       ig:'—Iguales no: mire la regla, las dos marcas están en sitios distintos. '
+         +'Cuente los octavos de cada caja.'},
+  mal:'Trozos iguales: cuenta cuántos se lleva cada mesa, o mira quién cae más a la derecha.'},
+
+ /* Peldaño 2: mismo numerador. Más partes tocan a menos. Aquí NO se exige
+    igualar los cortes: el argumento es el tamaño del trozo, no la cuenta. */
+ {compara:true, libre:true, cajas:[3,4], fA:[1,3], fB:[1,4], menu:[3,4,6,12],
+  cli:'—Mesa 4 pide <b>un tercio</b> y mesa 7 ' + azul('un cuarto')
+     +', y discuten: que si 4 es más que 3, que si el cuarto gana…',
+  nick:'—Más comensales tocan a menos, se lo digo yo. Pero prepárelo, que verlo es gratis.',
+  pista:'Un trozo en cada caja: 1/3 y 1/4. Mira el tamaño de cada uno.',
+  ok:'—El del tercio. Cuantas MÁS partes se hace una pizza, más pequeño toca cada trozo: '
+    +'por eso <b>1/4 &lt; 1/3 aunque 4 &gt; 3</b>. Y si alguien protesta, córtelas las dos '
+    +'en 12 y cuente: 4/12 contra 3/12.',
+  rep:{B:'—Ya sé lo que ha pensado: que 4 es más que 3. Pero ese número dice <b>en cuántas '
+        +'partes se corta la pizza</b>, no cuánto toca. Más comensales, menos ración. '
+        +'Míreles el tamaño a los dos trozos.',
+       ig:'—¿Iguales? Ponga un trozo encima del otro. El de la mesa 4 sobra por todas partes.'},
+  mal:'Que 4 sea más que 3 no ayuda: más partes tocan a MENOS. Mira el tamaño de cada trozo.'},
+
+ /* Peldaño 3: un denominador cabe en el otro. Con recortar UNA, listo.  */
+ {compara:true, cajas:[4,8], fA:[3,4], fB:[5,8], menu:[2,4,8],
+  cli:'—Mesa 4, <b>tres cuartos</b>; mesa 7, ' + azul('cinco octavos') + '. Y va apuesta.',
+  nick:'—Cuartos contra octavos: trozos distintos, y con trozos distintos no hay cuenta '
+      +'que valga. Pero los cuartos se dejan recortar: pase el cortador por UNA caja '
+      +'y quedan igualadas.',
+  pista:'Corta la de cuartos en 8: 3/4 pasará a llamarse 6/8.',
+  ok:'—Mesa 4: seis octavos contra cinco. Bastaba recortar UNA caja, porque los cuartos '
+    +'caben justos en los octavos. <b>Un octavo de diferencia</b>, para ser exactos.',
+  rep:{B:'—Cinco trozos contra tres, sí. Pero de distinto tamaño: <b>un octavo es la mitad '
+        +'de un cuarto</b>. Contar trozos que no miden lo mismo no vale para nada. '
+        +'Iguálelos y volvemos a hablar.',
+       ig:'—No caen en el mismo punto. Póngalas en octavos las dos y lo verá.'},
+  mal:'Ahora los trozos son iguales: cuenta, o mira quién cae más a la derecha.'},
+
+ /* Peldaño 4: ni uno cabe en el otro. Cortar LAS DOS, y en 15 caben los
+    dos cortes: la misma secuencia de trozos. Eso ES el denominador común. */
+ {compara:true, cajas:[3,5], fA:[2,3], fB:[3,5], menu:[3,5,6,10,15],
+  cli:'—Mesa 4 quiere <b>dos tercios</b> y mesa 7 quiere ' + azul('tres quintos')
+     +'. ¿Quién se lleva más pizza?',
+  nick:'—Tercios y quintos: ni unos caben en los otros ni al revés. Aquí toca cortar '
+      +'LAS DOS… y hay un número de trozos donde caben los dos cortes.',
+  pista:'Ni 3 cabe en 5 ni 5 en 3: busca un corte donde quepan LOS DOS.',
+  ok:'—Mesa 4, por un pelo: diez quinceavos contra nueve. Ponerlas en la MISMA secuencia '
+    +'de trozos: eso —y no otra cosa— es <b>el denominador común</b>. '
+    +'Diferencia: un quinceavo.',
+  rep:{B:'—Ya veo el razonamiento: 3 es más que 2 y 5 es más que 3, así que gana. '
+        +'Pues eso mismo pasaba hace dos pedidos con 1/3 y 1/4 —el 4 era mayor que el 3— '
+        +'y <b>ganaba el tercio</b>. Con trozos distintos, contar no sirve. Iguálelos.',
+       ig:'—Iguales no, pero por poco: un solo quinceavo los separa. Córtelas las dos y cuente.'},
+  mal:'Ahora los trozos son iguales: cuenta quinceavos, o mira quién cae más a la derecha.'},
+
+ /* Peldaño 5: iguales disfrazados. Comparar también puede acabar en empate. */
+ {compara:true, cajas:[4,6], fA:[2,4], fB:[3,6], menu:[2,3,4,6,8,12],
+  cli:'—Mesa 4 pide <b>dos cuartos</b>; mesa 7, ' + azul('tres sextos')
+     +'. Se han jugado un café.',
+  nick:'—Pues alguien va a pagar dos cafés. Córtelas igual y se acaba la apuesta.',
+  pista:'Prepara 2/4 y 3/6, córtalas igual… y mira las marcas.',
+  ok:'—Nadie paga el café: 6/12 y 6/12, <b>el MISMO punto de la regla con dos nombres</b>. '
+    +'Comparar también puede acabar en empate.',
+  rep:{A:'—¿Seguro? Córtelas las dos igual y míreme las marcas de la regla antes de contestar.',
+       B:'—¿Porque 3 es más que 2? Pero también 6 es más que 4. Córtelas igual y verá '
+        +'la sorpresa.'},
+  mal:'Mira las dos marcas de la regla. Fíjate bien…'},
+
+ /* Peldaño 6: el encargo por teléfono. El cortador no llega a 56; el
+    papel, sí. Y de los numeradores nuevos —49 = 7·7, 48 = 8·6— sale la
+    multiplicación en cruz demostrada, que no recitada.                  */
+ {compara:true, telefono:true, cajas:[], fA:[7,8], fB:[6,7],
+  cli:'—(Al teléfono) Dos encargos para recoger: <b>siete octavos</b> para mí y '
+     + azul('seis séptimos') + ' para mi hermano, que jura que lo suyo es más. '
+     +'¿Quién tiene razón?',
+  nick:'—¿Octavos contra séptimos? Harían falta 56 trozos y el cortador de la casa '
+      +'no hila tan fino. Esto se resuelve en el papel, que ahí el filo no se despunta.',
+  pista:'Aquí no hay pizza que valga: dale a cortar sobre el papel.',
+  ok:'—El de 7/8, por un trozo de 56: 49 contra 48. Y fíjese en los números: '
+    +'<b>49 = 7×7 y 48 = 8×6</b>. Ha multiplicado EN CRUZ sin querer; la regla famosa '
+    +'no es un truco, es este corte sobre el papel.',
+  rep:{B:'—Su hermano dice lo mismo, y por lo mismo: que a 6/7 le falta un séptimo y a 7/8 '
+        +'un octavo. Pero <b>al que le falta menos, se lleva más</b>, y un octavo es más '
+        +'pequeño que un séptimo. En la secuencia de 56: 48 trozos contra 49.',
+       ig:'—Ni hablar: 49 y 48 no son el mismo número, por muy cerca que anden.'},
+  mal:'En la secuencia de 56: ¿quién va más lejos, el 49 o el 48?'}
+];
+PEDIDOS.forEach(p => { if(p.compara) p.mesas = p.mesas || ['MESA 4', 'MESA 7']; });
+
+/* ── PIEZAS ─────────────────────────────────────────────────────────── */
+function grupos(c){
+  const n = c.cortes, g = [], usados = new Array(n).fill(false);
+  for(let i = 0; i < n; i++){
+    if(usados[i] || (c.grapas[(i - 1 + n) % n] && n > 1)) continue;
+    const t = [i]; usados[i] = true;
+    let j = i;
+    while(c.grapas[j] && t.length < n){ j = (j + 1) % n; if(usados[j]) break; t.push(j); usados[j] = true; }
+    g.push(t);
+  }
+  if(!g.length) g.push([...Array(n).keys()]);
+  return g;
+}
+/* EL TIQUE YA NO SIMPLIFICA GRATIS. Antes esta función devolvía
+   «6/8 = 3/4» ella sola, con su máximo común divisor de tapadillo, y así la
+   grapadora no tenía nada que enseñar. Ahora cada fracción se llama como
+   está cortada; el nombre nuevo lo fabrica el gesto, y lo enseña la
+   operación escrita, no el tique por su cuenta. */
+const nombre = (k, b) => k + '/' + b;
+const corto = nombre;
+const trozosDe = c => Math.round(valor(c) * c.cortes);
+function valor(c){
+  return grupos(c).filter(t => c.sel.has(t[0])).reduce((s, t) => s + t.length, 0) / c.cortes;
+}
+
+/* ── VOLVER A CORTAR SIN PERDER LO GRAPADO ───────────────────────────
+   El cortador pasa por toda la pizza, pero lo grapado AGUANTA: las juntas
+   nuevas que caen dentro de una pieza ya unida nacen grapadas. Así media
+   pizza sigue siendo la misma pieza y solo cambia de nombre: 1/2 → 4/8.
+   Si el corte nuevo no es múltiplo del viejo (de cuartos a tercios), no hay
+   manera de respetar las piezas y se empieza de cero.                    */
+function recorta(c, nuevo){
+  const b = c.cortes;
+  if(nuevo === b) return;
+  /* lo que se enseñará escrito: si hay algo elegido, se usa esa fracción;
+     si no, la fracción unidad, que es la que mejor se ve */
+  if(nuevo % b === 0){
+    const ka = trozosDe(c) || 1, f = nuevo / b;
+    ultimaOp = {tipo:'corte', c: f, ka, ba: b, kd: ka * f, bd: nuevo};
+  }else ultimaOp = null;
+  if(nuevo % b === 0){
+    const f = nuevo / b, g2 = new Array(nuevo).fill(false), gv = grupos(c);
+    /* El cortador pasa por TODA la pizza, pero cada pieza reacciona distinto:
+       · una pieza GRAPADA aguanta entera —las juntas nuevas de su interior
+         nacen unidas—, así que solo cambia de nombre: 1/2 pasa a 4/8;
+       · un trozo suelto SÍ se parte: un cuarto sin grapar se convierte en dos
+         octavos de verdad, separados.
+       Sin esa diferencia no habría octavos sueltos que coger, y el pedido de
+       tres octavos sería imposible. */
+    gv.forEach(t => {
+      const unida = t.length > 1;
+      t.forEach((i, idx) => {
+        for(let k = 0; k < f - 1; k++) g2[i*f + k] = unida;
+        if(idx < t.length - 1) g2[i*f + f - 1] = true;     // junta interna del grupo
+      });
+    });
+    /* LA ELECCIÓN TAMBIÉN SE HEREDA ENTERA. Un trozo suelto elegido se parte
+       en f hijos: los f quedan elegidos —antes solo se quedaba el primero, y
+       1/4 elegido amanecía como 1/8 mientras la operación juraba que era
+       2/8—. Una pieza grapada elegida sigue siendo una pieza: basta su
+       cabeza. Así la imagen y la igualdad dicen siempre lo mismo. */
+    const sel2 = new Set();
+    gv.forEach(t => {
+      if(!c.sel.has(t[0])) return;
+      if(t.length > 1) sel2.add(t[0] * f);
+      else for(let k = 0; k < f; k++) sel2.add(t[0]*f + k);
+    });
+    c.grapas = g2; c.sel = sel2;
+    /* Si el cliente no tenía nada elegido, la operación hablaba de un trozo
+       que no se veía por ninguna parte: los números salían de la nada. Ahora
+       queda MARCADO el trozo del que habla —el primero—, para que la imagen
+       y la igualdad digan lo mismo. */
+    if(!sel2.size) for(let k = 0; k < f; k++) c.sel.add(k);
+  }else{
+    c.grapas = new Array(nuevo).fill(false); c.sel.clear();
+  }
+  c.cortes = nuevo; c.recien.clear();
+}
+
+/* ── DIBUJO ─────────────────────────────────────────────────────────── */
+function sector(cx, cy, r, a0, a1){
+  const rad = a => (a - 90) * Math.PI / 180;
+  if(a1 - a0 >= 359.9) return `M${cx-r} ${cy} a${r} ${r} 0 1 0 ${2*r} 0 a${r} ${r} 0 1 0 ${-2*r} 0 Z`;
+  const x0 = cx + r*Math.cos(rad(a0)), y0 = cy + r*Math.sin(rad(a0));
+  const x1 = cx + r*Math.cos(rad(a1)), y1 = cy + r*Math.sin(rad(a1));
+  return `M${cx} ${cy} L${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 ${(a1-a0)>180?1:0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)} Z`;
+}
+function dibujaPizza(c, idx){
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 300 300'); svg.setAttribute('class', 'pizza');
+  const cx = 150, cy = 148, R = 126, paso = 360 / c.cortes;
+  /* A quince cortes el trozo tiene 24 grados: los huecos fijos de antes se
+     comían el queso y cuatro ingredientes por trozo eran una avalancha.
+     Ahora huecos e ingredientes van A ESCALA del trozo. */
+  const gC = Math.min(.9, paso * .03), gQ = Math.min(2.6, paso * .09);
+  const esc = Math.max(.55, Math.min(1, paso / 70));
+  const nTop = paso >= 70 ? 4 : paso >= 40 ? 3 : paso >= 26 ? 2 : 1;
+  const som = document.createElementNS(NS, 'ellipse');
+  som.setAttribute('cx', cx); som.setAttribute('cy', cy + R + 8);
+  som.setAttribute('rx', R*.86); som.setAttribute('ry', 8);
+  som.setAttribute('fill', 'rgba(60,40,20,.25)'); svg.appendChild(som);
+
+  grupos(c).forEach(t => {
+    const a0 = t[0]*paso, a1 = a0 + t.length*paso, ele = c.sel.has(t[0]);
+    const g = document.createElementNS(NS, 'g');
+    g.setAttribute('class', 'corte' + (ele ? ' elegida' : (c.sel.size ? ' apagada' : '')));
+    if(ele){                       // se separa siguiendo su propia bisectriz
+      const bis = ((a0 + a1) / 2 - 90) * Math.PI / 180;
+      g.setAttribute('transform', `translate(${(10*Math.cos(bis)).toFixed(1)} ${(10*Math.sin(bis)).toFixed(1)})`);
+    }
+    const cor = document.createElementNS(NS, 'path');           // corteza
+    cor.setAttribute('d', sector(cx, cy, R, a0 + gC, a1 - gC));
+    cor.setAttribute('fill', 'var(--corteza)');
+    cor.setAttribute('stroke', ele ? '#FFF3D0' : 'var(--cortezaO)');
+    cor.setAttribute('stroke-width', ele ? 6 : 2.5); cor.setAttribute('stroke-linejoin', 'round');
+    g.appendChild(cor);
+    const que = document.createElementNS(NS, 'path');            // queso
+    que.setAttribute('d', sector(cx, cy, R - 13, a0 + gQ, a1 - gQ));
+    que.setAttribute('fill', 'var(--queso)'); g.appendChild(que);
+
+    for(let k = 0; k < t.length; k++){
+      const a = (t[0] + k + .5) * paso - 90;
+      [[.60, 9.5, 1], [.80, 6, 0], [.36, 7, 1], [.72, 5, 0]].slice(0, nTop)
+      .forEach(([d, rr, esTomate], q) => {
+        const ang = (a + (q - (nTop - 1)/2) * Math.min(9, paso/3.2)) * Math.PI / 180;
+        const px = cx + (R-15)*d*Math.cos(ang), py = cy + (R-15)*d*Math.sin(ang);
+        if(esTomate){
+          const s = document.createElementNS(NS, 'circle');
+          s.setAttribute('cx', px); s.setAttribute('cy', py + 1.4); s.setAttribute('r', rr*esc);
+          s.setAttribute('fill', 'var(--tomateO)'); s.setAttribute('opacity', .5); g.appendChild(s);
+          const p = document.createElementNS(NS, 'circle');
+          p.setAttribute('cx', px); p.setAttribute('cy', py); p.setAttribute('r', rr*esc);
+          p.setAttribute('fill', 'var(--tomate)'); g.appendChild(p);
+        }else{
+          const h = document.createElementNS(NS, 'ellipse');
+          h.setAttribute('cx', px); h.setAttribute('cy', py);
+          h.setAttribute('rx', rr*1.5*esc); h.setAttribute('ry', rr*.85*esc);
+          h.setAttribute('fill', 'var(--albahaca)');
+          h.setAttribute('transform', `rotate(${a + 40} ${px} ${py})`); g.appendChild(h);
+        }
+      });
+    }
+    for(let k = 0; k < t.length - 1; k++){        // grapas, solo las nuevas
+      if(!c.recien.has(t[k])) continue;
+      const gr = (t[k] + 1) * paso, a = (gr - 90) * Math.PI / 180;
+      const cos = document.createElementNS(NS, 'path');
+      cos.setAttribute('d', `M${cx} ${cy} L${(cx + R*Math.cos(a)).toFixed(1)} ${(cy + R*Math.sin(a)).toFixed(1)}`);
+      cos.setAttribute('stroke', 'var(--cortezaO)'); cos.setAttribute('stroke-width', 2.6);
+      cos.setAttribute('stroke-dasharray', '7 6'); cos.setAttribute('class', 'costura-nueva');
+      g.appendChild(cos);
+      [[.38, 1], [.72, -1]].forEach(([d, lado], q) => {
+        const px = cx + R*d*Math.cos(a), py = cy + R*d*Math.sin(a);
+        const fuera = document.createElementNS(NS, 'g');   // capa que coloca
+        fuera.setAttribute('transform', `translate(${px.toFixed(1)} ${py.toFixed(1)}) rotate(${gr + (q?8:-8)})`);
+        const dentro = document.createElementNS(NS, 'g');  // capa que anima
+        dentro.setAttribute('class', 'grapa-nueva');
+        const forma = `M-12 ${6.5*lado} L-12 0 L12 0 L12 ${6.5*lado}`;
+        [['rgba(60,45,30,.35)', 7.2, 'translate(1 1.6)'], ['var(--grapa)', 5.2, null]].forEach(([col, gw, tr]) => {
+          const p = document.createElementNS(NS, 'path');
+          p.setAttribute('d', forma); p.setAttribute('fill', 'none'); p.setAttribute('stroke', col);
+          p.setAttribute('stroke-width', gw); p.setAttribute('stroke-linecap', 'round');
+          p.setAttribute('stroke-linejoin', 'round'); if(tr) p.setAttribute('transform', tr);
+          dentro.appendChild(p);
+        });
+        const bri = document.createElementNS(NS, 'path');
+        bri.setAttribute('d', 'M-11 -1.5 L11 -1.5'); bri.setAttribute('fill', 'none');
+        bri.setAttribute('stroke', '#EDF1F4'); bri.setAttribute('stroke-width', 1.4);
+        bri.setAttribute('stroke-linecap', 'round'); dentro.appendChild(bri);
+        fuera.appendChild(dentro); g.appendChild(fuera);
+      });
+    }
+    g.addEventListener('click', ev => {
+      ev.stopPropagation(); activa = idx;
+      if(c.sel.has(t[0])) c.sel.delete(t[0]); else c.sel.add(t[0]);
+      ultimaOp = null;            // al cambiar lo elegido, la operación vieja ya no describe esto
+      pinta(); lee();
+    });
+    svg.appendChild(g);
+  });
+  return svg;
+}
+function pinta(){
+  const p = PEDIDOS[pedido];
+  const mesa = document.getElementById('mesa'); mesa.innerHTML = '';
+  if(!cajas.length) return;                         // el teléfono no trae cajas
+  cajas.forEach((c, i) => {
+    const caja = document.createElement('div');
+    caja.className = 'caja' + (i === activa && cajas.length > 1 ? ' activa' : '')
+                   + (p.compara ? (i ? ' mB' : ' mA') : '');
+    const tapa = document.createElement('div');
+    tapa.className = 'tapa';
+    tapa.textContent = (p.compara ? T(p.mesas[i]) : T('CAJA ') + (i+1)) + T(' · EN ') + c.cortes;
+    caja.appendChild(tapa); caja.appendChild(dibujaPizza(c, i));
+    caja.addEventListener('click', () => { activa = i; pinta(); lee(); });
+    mesa.appendChild(caja);
+  });
+  /* LA GRAPADORA INDUSTRIAL. Pasa por la pizza ENTERA uniendo de c en c, y
+     es la operación exactamente inversa al cortador: cortar en c multiplica
+     arriba y abajo por c; grapar de c en c los divide. Con la grapadora de
+     mano solo cambia MI trozo —la pizza sigue partida igual—; con esta
+     cambia el denominador de verdad, porque cambia en cuántas partes está
+     la pizza. */
+  const ind = document.getElementById('botIndustrial'); ind.innerHTML = '';
+  const cc = cajas[activa].cortes;
+  [2,3,4,5].filter(x => cc % x === 0 && cc / x >= 1).forEach(x => {
+    const b = document.createElement('button');
+    b.className = 'b'; b.textContent = T('de ') + x + T(' en ') + x;
+    b.addEventListener('click', () => {
+      const c = cajas[activa];
+      /* qué trozos tenía elegidos ANTES, en unidades finas: así, después de
+         grapar, se vuelven a marcar las piezas que los contienen y la imagen
+         sigue diciendo lo mismo que la operación */
+      const finos = grupos(c).filter(g => c.sel.has(g[0])).flat();
+      const kAntes = finos.length, bAntes = c.cortes, vAntes = valor(c);
+      c.recien.clear();
+      c.grapas = new Array(c.cortes).fill(false);
+      for(let i = 0; i < c.cortes; i++)
+        if((i + 1) % x !== 0){ c.grapas[i] = true; c.recien.add(i); }
+      c.sel.clear();
+      if(kAntes) grupos(c).forEach(g => { if(g.some(i => finos.includes(i))) c.sel.add(g[0]); });
+      else c.sel.add(0);                       // sin nada elegido, se marca la primera pieza
+      /* LA MÁQUINA GRANDE TAMBIÉN SABE CALLARSE. La división escrita solo es
+         verdad si x cabe en el numerador Y los trozos elegidos llenaban
+         piezas enteras. Con 2 sextos y la máquina de 3 en 3 no hay tal
+         división —2 entre 3 no da un numerador— y además los 2 sextos caen
+         DENTRO de una pieza de 3 que ahora va entera: la cantidad cambia.
+         Escribir 2/6 = 0,66…/2 sería mentir con flechas; mejor decir qué ha
+         pasado de verdad. */
+      let notaIndustrial = null;
+      const vDespues = valor(c);
+      if(!kAntes)
+        ultimaOp = {tipo:'grapa', c: x, ka: x, ba: bAntes, kd: 1, bd: bAntes / x};
+      else if(kAntes % x === 0 && casi(vAntes, vDespues))
+        ultimaOp = {tipo:'grapa', c: x, ka: kAntes, ba: bAntes, kd: kAntes / x, bd: bAntes / x};
+      else{
+        ultimaOp = null;
+        notaIndustrial = T('La máquina grande une la pizza ENTERA de ') + x + T(' en ') + x
+          + T(': tus ') + kAntes + '/' + bAntes + T(' no llenaban piezas enteras, así que te llevas las piezas que los contienen. Aquí no hay división que enseñar.');
+      }
+      Ruido.grapa(); clac();
+      pinta(); lee();
+      if(notaIndustrial) document.getElementById('desglose').innerHTML = notaIndustrial;
+      clearTimeout(monta.reloj);
+      monta.reloj = setTimeout(() => { cajas.forEach(z => z.recien.clear()); pinta(); }, 2600);
+    });
+    ind.appendChild(b);
+  });
+  /* LA CARTA DE CORTES. Cada pedido trae la suya —en la comparación de
+     tercios contra quintos aparecen el 6, el 10 y el 15, para que el alumno
+     DESCUBRA que solo uno vale para las dos—. Los cortes que no respetan
+     las piezas van punteados y piden un segundo toque. */
+  const cont = document.getElementById('botCortes'); cont.innerHTML = '';
+  (p.menu || [2,3,4,5,6,8]).forEach(n => {
+    const c = cajas[activa];
+    /* el punteado solo cuando de verdad hay algo que perder: sobre una caja
+       intacta, cualquier corte es inocente */
+    const enJuego = c.sel.size > 0 || c.grapas.some(Boolean);
+    const rompe = n % c.cortes !== 0 && enJuego;
+    const avisado = armado && armado.caja === activa && armado.n === n;
+    const b = document.createElement('button');
+    b.className = 'b' + (rompe && n !== c.cortes ? ' rompe' : '') + (avisado ? ' avisa' : '');
+    b.textContent = n;
+    b.setAttribute('aria-pressed', String(c.cortes === n));
+    b.addEventListener('click', () => {
+      const cj = cajas[activa];
+      if(n === cj.cortes) return;
+      const destruye = n % cj.cortes !== 0 && (cj.sel.size > 0 || cj.grapas.some(Boolean));
+      if(destruye && !(armado && armado.caja === activa && armado.n === n)){
+        armado = {caja: activa, n};
+        clearTimeout(pinta.aviso);
+        pinta.aviso = setTimeout(() => { armado = null; pinta(); }, 3200);
+        pinta();
+        Ruido.mal();
+        document.getElementById('desglose').innerHTML =
+          T('De ') + cj.cortes + T(' a ') + n + T(' el cortador <b>no respeta las piezas</b>: se pierde lo grapado y lo elegido. Toca otra vez para cortar de cero.');
+        return;
+      }
+      armado = null;
+      Ruido.corte(); recorta(cj, n); pinta(); lee();
+    });
+    cont.appendChild(b);
+  });
+}
+
+/* ── LA OPERACIÓN, DIBUJADA ──────────────────────────────────────────
+   Se guarda el ANTES y el DESPUÉS de la fracción y se pinta la igualdad con
+   sus dos flechas —la de arriba para el numerador, la de abajo para el
+   denominador— y el mismo número en las dos, que es justo lo que hace el
+   gesto: cortar multiplica los dos; grapar de c en c divide los dos.      */
+let ultimaOp = null;
+/* LA PUNTA DE FLECHA. Se calcula con la TANGENTE de la curva en su final
+   —no a ojo—: si no, la cabeza sale torcida o mirando a otro lado. */
+function punta(x1, y1, cx, cy, col, largo = 13){
+  const tx = x1 - cx, ty = y1 - cy, L = Math.hypot(tx, ty);
+  const ux = tx / L, uy = ty / L, ang = 24 * Math.PI / 180;
+  const P = s => [
+    (x1 - largo * (ux * Math.cos(s*ang) - uy * Math.sin(s*ang))).toFixed(1),
+    (y1 - largo * (ux * Math.sin(s*ang) + uy * Math.cos(s*ang))).toFixed(1)];
+  const [ax, ay] = P(1), [bx, by] = P(-1);
+  return `<path d="M${x1} ${y1} L${ax} ${ay} L${bx} ${by} Z" fill="${col}"/>`;
+}
+/* EL CARA A CARA. Cuando las dos mesas están servidas y las pizzas cortadas
+   IGUAL, la operación deja paso a la comparación en limpio: dos numeradores
+   grandes sobre el mismo denominador. Misma secuencia: gana el que va más
+   lejos. Si van igual de lejos, empate con dos nombres.                  */
+function caraACara(kA, kB, b){
+  return `<div class="opera">
+    <div class="rot">${T('MISMOS TROZOS · SE PUEDE COMPARAR')}</div>
+    <svg viewBox="0 0 300 122">
+      <g font-family="'Bree Serif',serif" text-anchor="middle">
+        <text x="88"  y="52" font-size="38" fill="var(--tomate)">${kA}</text>
+        <text x="212" y="52" font-size="38" fill="var(--azul)">${kB}</text>
+        <text x="88"  y="102" font-size="22" fill="var(--tinta)">${b}</text>
+        <text x="212" y="102" font-size="22" fill="var(--tinta)">${b}</text>
+      </g>
+      <text x="150" y="68" text-anchor="middle" font-family="'Special Elite',monospace"
+            font-size="9" letter-spacing="2" fill="#9A8A70">${T('FRENTE A')}</text>
+      <path d="M62 64 H114" stroke="var(--tinta)" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M186 64 H238" stroke="var(--tinta)" stroke-width="2.6" stroke-linecap="round"/>
+    </svg>
+    <div class="frase">${kA === kB
+      ? T('Mismo numerador también: el MISMO punto con dos nombres.')
+      : T('Misma secuencia de ') + b + T(': gana el numerador mayor.')}</div>
+  </div>`;
+}
+/* EL CORTE SOBRE EL PAPEL. Las dos fracciones del teléfono, puestas en la
+   misma secuencia de 56: cada una multiplicada arriba y abajo por el
+   denominador DE LA OTRA. Al resolver, se destapa lo que son los
+   numeradores nuevos: los productos en cruz.                             */
+function papelPanel(){
+  const p = PEDIDOS[pedido];
+  if(!papel) return `<div class="opera">
+    <div class="rot">${T('ENCARGO POR TELÉFONO')}</div>
+    <svg viewBox="0 0 300 122">
+      <g font-family="'Bree Serif',serif" text-anchor="middle">
+        <text x="88"  y="52" font-size="34" fill="var(--tomate)">${p.fA[0]}</text>
+        <text x="212" y="52" font-size="34" fill="var(--azul)">${p.fB[0]}</text>
+        <text x="88"  y="102" font-size="24" fill="var(--tinta)">${p.fA[1]}</text>
+        <text x="212" y="102" font-size="24" fill="var(--tinta)">${p.fB[1]}</text>
+      </g>
+      <text x="150" y="68" text-anchor="middle" font-family="'Special Elite',monospace"
+            font-size="9" letter-spacing="2" fill="#9A8A70">${T('FRENTE A')}</text>
+      <path d="M64 64 H112" stroke="var(--tinta)" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M188 64 H236" stroke="var(--tinta)" stroke-width="2.6" stroke-linecap="round"/>
+    </svg>
+    <div class="frase">${T('Octavos contra séptimos: harían falta 56 trozos. Se corta sobre el papel.')}</div>
+  </div>`;
+  const fila = (y, k, b, K, B, f, col, anota) => `
+    <g font-family="'Bree Serif',serif" text-anchor="middle" font-size="26" fill="var(--tinta)">
+      <text x="58" y="${y}">${k}</text><text x="58" y="${y+36}">${b}</text>
+      <text x="118" y="${y+18}">=</text>
+      <text x="182" y="${y}">${K}</text><text x="182" y="${y+36}">${B}</text>
+    </g>
+    <path d="M42 ${y+10} H74"   stroke="var(--tinta)" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M160 ${y+10} H204" stroke="var(--tinta)" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M74 ${y-20} Q120 ${y-40} ${162} ${y-22}" fill="none" stroke="${col}"
+          stroke-width="2.6" stroke-linecap="round"/>
+    ${punta(166, y-21, 120, y-40, col, 10)}
+    <text x="120" y="${y-32}" text-anchor="middle" font-family="'Bree Serif',serif"
+          font-size="15" fill="${col}">·${f}</text>
+    ${resuelto ? `<text x="214" y="${y}" text-anchor="start" font-family="'Special Elite',monospace"
+          font-size="11.5" fill="#9A8A70">= ${anota}</text>` : ''}`;
+  return `<div class="opera">
+    <div class="rot">${T('CORTADO SOBRE EL PAPEL · ARRIBA Y ABAJO')}</div>
+    <svg viewBox="0 0 300 218">
+      ${fila(58,  p.fA[0], p.fA[1], p.fA[0]*p.fB[1], p.fA[1]*p.fB[1], p.fB[1], 'var(--tomate)', p.fA[0]+'×'+p.fB[1])}
+      ${fila(162, p.fB[0], p.fB[1], p.fB[0]*p.fA[1], p.fB[1]*p.fA[1], p.fA[1], 'var(--azul)',   p.fB[0]+'×'+p.fA[1])}
+    </svg>
+    <div class="frase">${T(resuelto
+      ? 'Los números comparados —49 y 48— son los productos EN CRUZ: la regla de multiplicar en cruz es exactamente este corte sobre el papel.'
+      : 'Ya están en la misma secuencia de 56: ahora sí se comparan.')}</div>
+  </div>`;
+}
+/* LO QUE LLEVAS, CAJA POR CAJA Y EN TOTAL. Con dos cajas abiertas, el panel
+   enseñaba solo la caja activa —«4/4»— mientras el cliente tenía además un
+   cuarto en la otra: parecía que el pedido estaba mal cuando estaba bien.
+   Ahora se ve la cuenta entera, y con dos avisos de honestidad:
+   · el total se escribe en FRACCIÓN, no en decimales: aquí todavía no toca;
+   · si las dos cajas están cortadas distinto, NO se suma nada. Trozos
+     distintos no se juntan: primero el mismo cortador. Es el mismo
+     argumento que en la comparación, y sale de la propia mesa. */
+function panelMesa(){
+  const ks = cajas.map(trozosDe), bs = cajas.map(c => c.cortes);
+  if(!ks.some(k => k > 0)) return '';
+  const mismo = bs.every(b => b === bs[0]);
+  const stack = (x, k, b, col) => `
+    <text x="${x}" y="40" font-size="26" fill="${col || 'var(--tinta)'}">${k}</text>
+    <text x="${x}" y="82" font-size="26" fill="${col || 'var(--tinta)'}">${b}</text>
+    <path d="M${x-19} 52 H${x+19}" stroke="${col || 'var(--tinta)'}" stroke-width="2.4" stroke-linecap="round"/>`;
+  const total = ks.reduce((s, k) => s + k, 0);
+  return `<div class="opera">
+    <div class="rot">${T('LLEVAS EN LA MESA')}</div>
+    <svg viewBox="0 0 300 100">
+      <g font-family="'Bree Serif',serif" text-anchor="middle">
+        ${stack(46, ks[0], bs[0])}
+        <text x="98" y="62" font-size="24" fill="#9A8A70">+</text>
+        ${stack(150, ks[1], bs[1])}
+        <text x="202" y="62" font-size="24" fill="#9A8A70">${mismo ? '=' : '?'}</text>
+        ${mismo ? stack(254, total, bs[0], 'var(--tomate)')
+                : `<text x="254" y="68" font-size="30" fill="#C3B49A">—</text>`}
+      </g>
+      <g font-family="'Special Elite',monospace" font-size="8" letter-spacing="1"
+         fill="#B0A28A" text-anchor="middle">
+        <text x="46" y="97">${T('CAJA 1')}</text><text x="150" y="97">${T('CAJA 2')}</text>
+        ${mismo ? '<text x="254" y="97">' + T('EN TOTAL') + '</text>' : ''}
+      </g>
+    </svg>
+    <div class="frase">${mismo
+      ? T('Trozos iguales: se juntan. ') + ks[0] + '/' + bs[0] + ' + ' + ks[1] + '/' + bs[1]
+        + ' = ' + total + '/' + bs[0] + (total > bs[0] ? T(', más de una pizza entera.') : '.')
+      : T('Una caja en ') + bs[0] + T(' y otra en ') + bs[1] + T(': trozos distintos no se juntan. Pásales el MISMO cortador.')}</div>
+  </div>`;
+}
+function pintaOperacion(){
+  const cont = document.getElementById('opera');
+  const p = PEDIDOS[pedido];
+  if(p.telefono){ cont.innerHTML = papelPanel(); return; }
+  if(p.compara && cajas[0].cortes === cajas[1].cortes){
+    const kA = trozosDe(cajas[0]), kB = trozosDe(cajas[1]);
+    if(kA && kB && casi(valor(cajas[0]), fVal(p.fA)) && casi(valor(cajas[1]), fVal(p.fB))){
+      cont.innerHTML = caraACara(kA, kB, cajas[0].cortes); return;
+    }
+  }
+  /* Mientras el cliente va tocando trozos, el panel enseña la fracción que
+     lleva —1/8, 2/8, 3/8…—, que es la que luego entrará en la operación. Sin
+     esto, los números aparecían de golpe al cortar o grapar y no se veía de
+     dónde salían. */
+  if(!ultimaOp){
+    if(cajas.length > 1){ cont.innerHTML = panelMesa(); return; }
+    const c = cajas[activa], k = trozosDe(c);
+    if(!k){ cont.innerHTML = ''; return; }
+    cont.innerHTML = `<div class="opera">
+      <div class="rot">${T('LLEVAS EN LA CAJA')}</div>
+      <svg viewBox="0 0 300 92">
+        <g font-family="'Bree Serif',serif" font-size="30" fill="var(--tinta)" text-anchor="middle">
+          <text x="150" y="42">${k}</text><text x="150" y="82">${c.cortes}</text>
+        </g>
+        <path d="M128 52 H172" stroke="var(--tinta)" stroke-width="2.8" stroke-linecap="round"/>
+      </svg></div>`;
+    return;
+  }
+  const {tipo, c, ka, ba, kd, bd} = ultimaOp;
+  const signo = tipo === 'corte' ? '·' : ':';
+  const col = tipo === 'corte' ? 'var(--tomate)' : 'var(--albahaca)';
+  const flecha = (y, dy, txt) => {
+    const x0 = 92, x1 = 208, cx = 150, cy = y + dy;
+    return `
+      <path d="M${x0} ${y} Q${cx} ${cy} ${x1 - 6} ${y}" fill="none" stroke="${col}"
+            stroke-width="3" stroke-linecap="round"/>
+      ${punta(x1, y, cx, cy, col)}
+      <text x="150" y="${dy < 0 ? 26 : 150}" text-anchor="middle"
+            font-family="'Bree Serif',serif" font-size="19" fill="${col}">${txt}</text>`;
+  };
+  cont.innerHTML = `<div class="opera">
+    <div class="rot">${T(tipo === 'corte' ? 'HAS CORTADO' : 'HAS GRAPADO')}</div>
+    <svg viewBox="0 0 300 158">
+      <g font-family="'Bree Serif',serif" font-size="27" fill="var(--tinta)" text-anchor="middle">
+        <text x="80" y="76">${ka}</text><text x="80" y="112">${ba}</text>
+        <text x="150" y="96">=</text>
+        <text x="220" y="76">${kd}</text><text x="220" y="112">${bd}</text>
+      </g>
+      <path d="M62 84 H98" stroke="var(--tinta)" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M202 84 H238" stroke="var(--tinta)" stroke-width="2.6" stroke-linecap="round"/>
+      ${flecha(58, -30, signo + c)}
+      ${flecha(116, 30, signo + c)}
+    </svg>
+    <div class="frase">${tipo === 'corte'
+      ? T('Cortar en ') + c + T(' multiplica arriba y abajo por ') + c + '.'
+      : T('Grapar de ') + c + T(' en ') + c + T(' divide arriba y abajo entre ') + c + '.'}</div>
+  </div>`;
+}
+
+/* ── LA PIZARRA: EL SIGNO ANTES DE LA CUENTA ─────────────────────────
+   Davydov hace escribir A > B mucho antes de saber cuánto vale nada: la
+   RELACIÓN entre magnitudes viene antes que el número. Aquí, en cuanto las
+   dos mesas tienen su pedido preparado y las pizzas siguen cortadas
+   distinto —o sea, cuando todavía NO se puede contar—, Nick pide el signo.
+   Después se iguala el corte y se comprueba si la apuesta aguantaba.
+   El fallo deja de ser un botón rojo y pasa a ser una conjetura que cae. */
+let prediccion = null;
+const signoReal = p => { const a = fVal(p.fA), b = fVal(p.fB);
+  return casi(a, b) ? '=' : (a > b ? '>' : '<'); };
+function pintaPizarra(){
+  const el = document.getElementById('pizarra'), p = PEDIDOS[pedido];
+  if(!p || !p.compara){ el.innerHTML = ''; return; }
+  /* La pizarra está desde el primer momento del pedido, antes de tocar una
+     sola pizza: el alumno se moja cuando aún no tiene NADA con que contar.
+     Esperar a que los pedidos estén preparados sería tarde —entonces ya
+     casi se ve la respuesta— y además se podía esquivar igualando los
+     cortes antes de elegir los trozos. */
+  const izq = '<span class="fA">' + fTxt(p.fA) + '</span>';
+  const der = '<span class="fB">' + fTxt(p.fB) + '</span>';
+  if(!prediccion){
+    el.innerHTML = `<div class="pizarra">
+      <div class="rot">${T('LA PIZARRA DE NICK')}</div>
+      <div class="linea">${izq}<span class="hueco-signo">?</span>${der}</div>
+      <div class="bots">
+        <button data-s="&gt;">&gt;</button><button data-s="=">=</button><button data-s="&lt;">&lt;</button>
+      </div>
+      <div class="apuesta">${T('SIN CORTAR NADA TODAVÍA: ¿QUÉ SE APUESTA?')}</div></div>`;
+    el.querySelectorAll('.bots button').forEach(b =>
+      b.addEventListener('click', () => { prediccion = b.dataset.s; Ruido.tiza(); lee(); }));
+  }else{
+    const bien = prediccion === signoReal(p);
+    el.innerHTML = `<div class="pizarra">
+      <div class="rot">${T('LA PIZARRA DE NICK')}</div>
+      <div class="linea">${izq}<span class="signo">${prediccion}</span>${der}</div>
+      <div class="apuesta">${T(resuelto
+        ? (bien ? 'LA APUESTA AGUANTÓ' : 'LA APUESTA NO AGUANTÓ')
+        : 'ESO DICE LA PIZARRA. LA CUENTA LO DIRÁ.')}</div></div>`;
+  }
+}
+
+/* ── EL TIQUE Y LA REGLA ────────────────────────────────────────────── */
+function pintaRegla(){
+  const p = PEDIDOS[pedido];
+  const cinta = document.getElementById('cinta'), marcas = document.getElementById('marcas');
+  cinta.innerHTML = ''; marcas.innerHTML = '';
+  const an = cinta.getBoundingClientRect().width;
+  /* Cuando se COMPARA, la regla va de 0 a 1: los dos pedidos son de clientes
+     distintos y no se suman, así que conviene toda la anchura para separar
+     bien las dos marcas. Cuando se SIRVE, la regla llega hasta el número de
+     pizzas, porque ahí sí se acumula. */
+  const compara = p.compara;
+  const tope = compara ? 1 : Math.max(cajas.length, 1);
+  const raya = (x, st) => {
+    const i = document.createElement('div');
+    Object.assign(i.style, {position:'absolute', left:x+'px', width:'1px'}, st);
+    cinta.appendChild(i);
+  };
+  /* LA REGLA DE DOS PEINES. Mientras las pizzas están cortadas distinto,
+     cada mesa peina la cinta por su lado: la mesa 4 desde arriba, la 7
+     desde abajo, cada una de su color. Las púas no casan: las fracciones
+     aún no viven en la misma secuencia y no hay cuenta que hacer. Cuando
+     el corte común llega, los dos peines se funden en uno solo, a toda
+     altura. Esa imagen ES el denominador común. */
+  if(p.telefono){
+    if(papel) for(let k = 1; k < 56; k++)
+      raya(k*an/56, {top:'0', height:'24px', background:'rgba(110,98,80,.45)'});
+    else{
+      for(let k = 1; k < p.fA[1]; k++)
+        raya(k*an/p.fA[1], {top:'0', height:'10px', background:'rgba(196,70,47,.65)'});
+      for(let k = 1; k < p.fB[1]; k++)
+        raya(k*an/p.fB[1], {bottom:'0', height:'10px', background:'rgba(47,110,140,.7)'});
+    }
+  }else if(compara && cajas[0].cortes !== cajas[1].cortes){
+    for(let k = 1; k < cajas[0].cortes; k++)
+      raya(k*an/cajas[0].cortes, {top:'0', height:'10px', background:'rgba(196,70,47,.65)'});
+    for(let k = 1; k < cajas[1].cortes; k++)
+      raya(k*an/cajas[1].cortes, {bottom:'0', height:'10px', background:'rgba(47,110,140,.7)'});
+  }else{
+    /* al servir, cada caja subdivide SU tramo de la regla: la caja 1 el
+       [0,1], la caja 2 el [1,2]… antes mandaba siempre la primera */
+    for(let u = 0; u < tope; u++){
+      const fin = (cajas[u] || cajas[0]).cortes;
+      for(let k = 1; k < fin; k++)
+        raya((u + k/fin)*an/tope, {top:'0', height:'13px', background:'#8A7A63'});
+    }
+  }
+  for(let u = 0; u <= tope; u++){
+    raya(u*an/tope, {top:'0', height:'24px', background:'#6E6250'});
+    const b = document.createElement('b'); b.textContent = u; b.style.left = (u*an/tope)+'px';
+    cinta.appendChild(b);
+  }
+  /* el hueco entre las dos marcas, rayado y con nombre, al resolver */
+  if(compara && resuelto){
+    let kA, kB, den;
+    if(p.telefono){ kA = p.fA[0]*p.fB[1]; kB = p.fB[0]*p.fA[1]; den = p.fA[1]*p.fB[1]; }
+    else if(cajas[0].cortes === cajas[1].cortes){
+      kA = trozosDe(cajas[0]); kB = trozosDe(cajas[1]); den = cajas[0].cortes;
+    }
+    if(den && kA !== kB && kA > 0 && kB > 0){
+      const x0 = Math.min(kA, kB)/den*an, x1 = Math.max(kA, kB)/den*an;
+      const h = document.createElement('div'); h.className = 'hueco';
+      h.style.left = x0+'px'; h.style.width = (x1 - x0)+'px';
+      if(x1 - x0 >= 16){
+        const s = document.createElement('span');
+        s.textContent = Math.abs(kA - kB) + '/' + den; h.appendChild(s);
+      }
+      cinta.appendChild(h);
+    }
+  }
+  const marca = (v, clase, txt) => {
+    if(v <= 0) return;
+    const m = document.createElement('div'); m.className = 'marca ' + clase;
+    m.style.left = (v * an / tope) + 'px';
+    m.innerHTML = '<em></em><u>' + txt + '</u>'; marcas.appendChild(m);
+  };
+  if(p.telefono){
+    marca(fVal(p.fA), '', papel ? (p.fA[0]*p.fB[1]) + '/' + (p.fA[1]*p.fB[1]) : fTxt(p.fA));
+    marca(fVal(p.fB), 'dos', papel ? (p.fB[0]*p.fA[1]) + '/' + (p.fB[1]*p.fA[1]) : fTxt(p.fB));
+  }else if(compara){
+    marca(valor(cajas[0]), '', corto(trozosDe(cajas[0]), cajas[0].cortes));
+    marca(valor(cajas[1]), 'dos', corto(trozosDe(cajas[1]), cajas[1].cortes));
+  }else{
+    const partes = cajas.map(c => ({k: trozosDe(c), b: c.cortes})).filter(t => t.k > 0);
+    const v = cajas.reduce((s, c) => s + valor(c), 0);
+    /* la marca lleva el NOMBRE del punto, en fracción. Si las cajas están
+       cortadas distinto todavía no hay una fracción que nombrarlo: no se
+       pone marca, y el tique explica por qué. */
+    if(partes.length && partes.every(t => t.b === partes[0].b))
+      marca(v, '', corto(partes.reduce((s2, t) => s2 + t.k, 0), partes[0].b));
+  }
+  /* si las dos marcas caen cerca, la segunda baja su rótulo para que se lean */
+  const ms = marcas.querySelectorAll('.marca');
+  if(ms.length === 2){
+    const xa = parseFloat(ms[0].style.left), xb = parseFloat(ms[1].style.left);
+    if(Math.abs(xa - xb) < 46) ms[1].querySelector('u').style.transform = 'translateY(15px)';
+  }
+}
+function lee(){
+  const p = PEDIDOS[pedido];
+  const lec = document.getElementById('lec'), des = document.getElementById('desglose');
+  if(p.telefono){
+    lec.innerHTML = papel
+      ? '<b>' + (p.fA[0]*p.fB[1]) + '/' + (p.fA[1]*p.fB[1]) + '</b>' + T(' frente a ')
+        + '<b style="color:var(--azul)">' + (p.fB[0]*p.fA[1]) + '/' + (p.fB[1]*p.fA[1]) + '</b>'
+      : '<b>' + fTxt(p.fA) + '</b>' + T(' frente a ') + '<b style="color:var(--azul)">' + fTxt(p.fB) + '</b>';
+    des.textContent = T(papel ? 'Misma secuencia de 56: ahora sí se comparan.'
+                              : 'Encargo doble: el cortador no llega a 56. Se corta sobre el papel.');
+    pintaRegla(); pintaOperacion(); pintaPizarra(); revisa(); return;
+  }
+  if(p.compara){                        // dos clientes: NO se suma, se compara
+    const a = trozosDe(cajas[0]), bb = trozosDe(cajas[1]);
+    lec.innerHTML = T(p.mesas[0]) + ': <b>' + (a ? corto(a, cajas[0].cortes) : '—') + '</b>'
+      + ' &nbsp;·&nbsp; ' + T(p.mesas[1]) + ': <b style="color:var(--azul)">'
+      + (bb ? corto(bb, cajas[1].cortes) : '—') + '</b>';
+    des.textContent = T(a && bb ? 'Dos pedidos distintos: no se suman, se comparan.'
+                                : 'Prepara los dos pedidos, uno en cada caja.');
+    pintaRegla(); pintaOperacion(); pintaPizarra(); revisa(); return;
+  }
+  const partes = cajas.map(c => ({k: trozosDe(c), b: c.cortes, v: valor(c)})).filter(t => t.k > 0);
+  const total = partes.reduce((s, t) => s + t.v, 0);
+  /* si TODA la pizza está grapada en piezas iguales, el denominador ha
+     cambiado de verdad y merece decirse: es dividir arriba y abajo */
+  const c0 = cajas[activa], gg = grupos(c0), s = gg[0].length;
+  const uniforme = gg.length > 1 && gg.every(t => t.length === s) && s > 1;
+  if(!partes.length){ lec.innerHTML = '—'; des.textContent = T('Toca las porciones que te llevas.'); }
+  else if(partes.length === 1){
+    lec.innerHTML = T('Te llevas ') + '<b>' + nombre(partes[0].k, partes[0].b) + '</b>';
+    des.innerHTML = uniforme
+      ? T('La pizza está en ') + '<b>' + gg.length + '</b>' + T(' partes iguales: has dividido arriba y abajo entre ') + s + '.'
+      : T('de pizza.');
+  }else if(partes.every(t => t.b === partes[0].b)){
+    /* trozos iguales: se juntan, y el total se escribe en FRACCIÓN. Antes
+       salía en decimales —1,25— y eso es otro tema y otro curso. */
+    const k = partes.reduce((s2, t) => s2 + t.k, 0), b = partes[0].b;
+    lec.innerHTML = T('Te llevas ') + '<b>' + nombre(k, b) + '</b>';
+    des.innerHTML = partes.map(t => corto(t.k, t.b)).join(' + ') + ' = ' + corto(k, b)
+      + (k > b ? T(' · más de una pizza entera') : '');
+  }else{
+    lec.innerHTML = partes.map(t => '<b>' + corto(t.k, t.b) + '</b>').join(' &nbsp;' + T('y') + '&nbsp; ');
+    des.innerHTML = T('Trozos distintos: todavía no se juntan. Pásales el <b>mismo cortador</b>.');
+  }
+  pintaRegla(); pintaOperacion(); pintaPizarra(); revisa();
+}
+
+/* ── LA CHARLA Y LA COMPROBACIÓN ────────────────────────────────────── */
+function pintaPasos(){
+  const el = document.getElementById('pasos'); el.innerHTML = '';
+  PEDIDOS.forEach((q, i) => {
+    const d = document.createElement('i');
+    d.className = (q.compara ? 'vs ' : '') + (i < pedido ? 'hecho' : i === pedido ? 'actual' : '');
+    el.appendChild(d);
+  });
+}
+function pintaCharla(remate, feliz){
+  const p = PEDIDOS[pedido];
+  document.getElementById('charla').innerHTML =
+    `<div class="voz cliente"><div class="quien">${T(p.telefono ? 'AL TELÉFONO' : 'CLIENTE')}`
+    + ` · ${T('PEDIDO')} ${pedido+1} ${T('DE')} ${PEDIDOS.length}</div>${T(p.cli)}</div>`
+  + `<div class="voz nick${feliz ? ' feliz' : ''}"><div class="cara-caja">${NICK}</div>` +
+       `<div class="quien">${T('NICK, EL PIZZERO')}</div>${remate || T(p.nick)}</div>`
+  + (remate ? '' : `<div class="pista">${T(p.pista)}</div>`);
+}
+/* LA PREGUNTA. Con las dos fracciones del pedido, las opciones y la
+   respuesta buena se fabrican solas —incluida la de «los dos igual», que en
+   el peldaño de los disfrazados por fin es la buena—.                    */
+function ponPregunta(p){
+  const fila = document.getElementById('filaResp');
+  fila.dataset.puesta = '1'; fila.innerHTML = '';
+  const q = document.createElement('span'); q.className = 'etq';
+  q.textContent = T('¿quién se lleva más?'); fila.appendChild(q);
+  const va = fVal(p.fA), vb = fVal(p.fB), iguales = casi(va, vb);
+  [[T('El de ') + fTxt(p.fA), !iguales && va > vb, 'A'],
+   [T('El de ') + fTxt(p.fB), !iguales && vb > va, 'B'],
+   [T('Los dos igual'), iguales, 'ig']].forEach(([txt, bien, clave]) => {
+    const bt = document.createElement('button'); bt.className = 'b'; bt.textContent = txt;
+    bt.addEventListener('click', () => {
+      if(bien){
+        resuelto = true; fila.innerHTML = '';
+        /* si hubo apuesta en la pizarra, Nick la recoge antes de explicar:
+           el alumno ve aguantar —o caer— su propia conjetura */
+        const guiño = !prediccion ? ''
+          : prediccion === signoReal(p)
+            ? T('Y lo que apuntó en la pizarra iba bien encaminado. ')
+            : T('La pizarra decía otra cosa, ¿eh? Por algo se cuenta antes de cobrar. ');
+        /* una sola raya de diálogo: el guiño y la explicación son la misma
+           intervención de Nick, no dos */
+        pintaCharla(guiño ? '—' + guiño + T(p.ok).replace(/^—/, '') : T(p.ok), true); Ruido.bien(); siguiente();
+        pintaRegla(); pintaOperacion(); pintaPizarra();
+      }else{
+        /* LA RESPUESTA MALA CASI NUNCA ES UN DESPISTE: suele ser una regla
+           razonable aplicada donde no vale. Nick la dice en voz alta y la
+           refuta con algo que el alumno YA ha vivido en un pedido anterior.
+           Es la diferencia entre corregir y escuchar. */
+        const rep = (p.rep || {})[clave];
+        if(rep) pintaCharla(T(rep), false);
+        Ruido.mal();
+        document.getElementById('desglose').textContent =
+          T(p.mal || 'Mira la regla: se lleva más el que cae más a la derecha.');
+      }
+    });
+    fila.appendChild(bt);
+  });
+}
+function revisa(){
+  const p = PEDIDOS[pedido], fila = document.getElementById('filaResp');
+  if(resuelto) return;
+  if(p.telefono) return;              // su pregunta la pone el corte sobre el papel
+  if(p.compara){
+    const okA = casi(valor(cajas[0]), fVal(p.fA));
+    const okB = casi(valor(cajas[1]), fVal(p.fB));
+    const igual = cajas[0].cortes === cajas[1].cortes;
+    /* La pregunta no se abre hasta que las dos pizzas están cortadas IGUAL:
+       con trozos distintos no hay cuenta que valga. Solo el peldaño del
+       mismo numerador va libre, porque ahí el argumento es otro: el tamaño
+       del trozo. Y si el alumno deshace lo preparado, la pregunta se
+       retira: nada de responder sobre una foto vieja. */
+    const listo = okA && okB && (p.libre || igual);
+    if(listo && !fila.dataset.puesta) ponPregunta(p);
+    else if(!listo && fila.dataset.puesta){ fila.innerHTML = ''; delete fila.dataset.puesta; }
+    if(okA && okB && !igual && !p.libre)
+      document.getElementById('desglose').textContent =
+        T('Los dos pedidos están listos: ahora pásales el MISMO cortador. Con trozos distintos no hay cuenta que valga.');
+    return;
+  }
+  /* Con dos cajas, el pedido no se da por bueno hasta que los trozos son
+     IGUALES: la cantidad puede salir, pero «media y un cuarto» sin igualar
+     el corte no es el pedido que Nick ha explicado. */
+  const trozos = cajas.map(c => ({k: trozosDe(c), b: c.cortes})).filter(t => t.k > 0);
+  const juntables = trozos.length < 2 || trozos.every(t => t.b === trozos[0].b);
+  const v = cajas.reduce((s, c) => s + valor(c), 0);
+  if(juntables && p.meta(v, cajas)){ pintaCharla(T(p.ok), true); Ruido.bien(); siguiente(); }
+  /* la cantidad está pero la pieza no: se dice, que si no parece un fallo */
+  else if(juntables && p.sinGrapa && casi(v, p.objetivo))
+    document.getElementById('desglose').innerHTML = T(p.sinGrapa);
+}
+function siguiente(){
+  const fila = document.getElementById('filaResp');
+  if(document.getElementById('bSig')) return;
+  if(pedido >= PEDIDOS.length - 1){
+    const fin = document.createElement('span'); fin.className = 'etq';
+    fin.textContent = T('· SERVICIO TERMINADO · NICK INVITA AL CAFÉ ·'); fila.appendChild(fin);
+    pintaCuenta();
+    return;
+  }
+  const bt = document.createElement('button');
+  bt.className = 'b verde'; bt.id = 'bSig'; bt.textContent = T('Siguiente pedido →');
+  bt.addEventListener('click', () => { pedido++; monta(); });
+  fila.appendChild(bt);
+}
+function monta(){
+  ultimaOp = null; resuelto = false; papel = false; armado = null; prediccion = null;
+  const p = PEDIDOS[pedido];
+  cajas = (p.cajas || []).map(nuevaCaja);
+  activa = 0;
+  const fila = document.getElementById('filaResp');
+  fila.innerHTML = ''; delete fila.dataset.puesta;
+  const tel = !!p.telefono;
+  document.getElementById('mesa').style.display = tel ? 'none' : 'flex';
+  ['filaCortes', 'filaInd', 'filaBotones'].forEach(id =>
+    document.getElementById(id).style.display = tel ? 'none' : 'flex');
+  pintaPasos(); pintaCharla();
+  if(tel){
+    Ruido.timbre();
+    const bt = document.createElement('button');
+    bt.className = 'b acc'; bt.textContent = T('Cortar sobre el papel');
+    bt.addEventListener('click', () => { papel = true; Ruido.corte(); lee(); ponPregunta(p); });
+    fila.appendChild(bt);
+    lee(); return;
+  }
+  pinta(); lee();
+}
+
+/* ── LA GRAPADORA. Solo une piezas CONTIGUAS: dos cuartos separados suman
+      lo mismo, pero no forman media pizza dentro de la caja.            */
+document.getElementById('bGrapar').addEventListener('click', () => {
+  const c = cajas[activa], n = c.cortes, des = document.getElementById('desglose');
+  const gs = grupos(c).filter(t => c.sel.has(t[0]));
+  if(gs.length < 2){ des.textContent = T('La grapadora necesita dos piezas o más, y pegadas.'); Ruido.mal(); return; }
+  const todos = gs.flat(), dentro = new Set(todos);
+  let hecho = false, nJuntos = 0;
+  for(let ini = 0; ini < n && !hecho; ini++){
+    if(!dentro.has(ini)) continue;
+    let ok = true;
+    for(let k = 0; k < todos.length; k++) if(!dentro.has((ini + k) % n)){ ok = false; break; }
+    if(!ok) continue;
+    hecho = true; c.recien.clear();
+    /* GRAPAR A MANO TAMBIÉN ES DIVIDIR. Si junto n trozos de 1/b y n cabe en
+       b, mi pieza pasa a ser 1 de las b/n que saldrían: n/b = 1/(b/n), o sea
+       dividir arriba y abajo entre n. Si n no cabe en b —tres octavos, por
+       ejemplo—, no hay tal división y no se enseña ninguna. */
+    nJuntos = todos.length;
+    ultimaOp = (n % nJuntos === 0 && nJuntos > 1)
+      ? {tipo:'grapa', c: nJuntos, ka: nJuntos, ba: n, kd: 1, bd: n / nJuntos}
+      : null;
+    for(let k = 0; k < todos.length - 1; k++){
+      const junta = (ini + k) % n;
+      if(!c.grapas[junta]) c.recien.add(junta);
+      c.grapas[junta] = true;
+    }
+    c.sel.clear(); c.sel.add(ini);
+  }
+  if(!hecho){
+    des.textContent = T('Esas piezas no están pegadas: sueltas suman lo mismo, pero no forman una.');
+    Ruido.mal(); return;
+  }
+  Ruido.grapa(); clac();
+  pinta(); lee();
+  /* Y CUANDO CALLA, DICE POR QUÉ. La pieza de 3/8 existe —ahí está,
+     grapada—, pero 3 no cabe en 8: no es 1 de nada entero, y por eso la
+     operación no enseña división ninguna. El silencio, explicado.        */
+  if(!ultimaOp && nJuntos > 1 && n % nJuntos !== 0)
+    des.innerHTML = T('Una pieza de ') + '<b>' + nJuntos + '/' + n + '</b>' + T('… pero ') + nJuntos
+      + T(' no cabe en ') + n + T(': esa pieza no es 1 de nada entero, y por eso aquí no hay división que enseñar.');
+  clearTimeout(monta.reloj);
+  monta.reloj = setTimeout(() => { cajas.forEach(x => x.recien.clear()); pinta(); }, 2600);
+});
+/* el brazo de Nick baja y sube al grapar: la clase se quita y se pone en
+   el fotograma siguiente, que si no el navegador no relanza la animación */
+function clac(){
+  const v = document.querySelector('.voz.nick'); if(!v) return;
+  v.classList.remove('grapando'); void v.offsetWidth; v.classList.add('grapando');
+}
+
+/* ── LA CUENTA. Al acabar el servicio, las seis comparaciones en el tique:
+   cada una con su signo y con la regla que dejó. Lo que un alumno debería
+   poder copiar en el cuaderno al cerrar la app. ── */
+const CUENTA = [
+ {f:[[3,8],[5,8]],  r:'Con los mismos trozos basta contar trozos: gana el numerador.'},
+ {f:[[1,3],[1,4]],  r:'Con el mismo numerador, más partes tocan a menos: gana el denominador pequeño.'},
+ {f:[[3,4],[5,8]],  r:'Si un corte cabe en el otro, se recorta una sola caja: 3/4 = 6/8.'},
+ {f:[[2,3],[3,5]],  r:'Si ninguno cabe, se cortan las dos donde quepan ambos: el denominador común (15).'},
+ {f:[[2,4],[3,6]],  r:'Dos nombres pueden ser el mismo punto: 6/12 y 6/12. Comparar puede acabar en empate.'},
+ {f:[[7,8],[6,7]],  r:'Cuando el cortador no llega, se corta sobre el papel: 49 y 48 son los productos en cruz.'}
+];
+function pintaCuenta(){
+  const el = document.getElementById('cuenta');
+  el.innerHTML = '<h2 style="margin-top:14px">' + T('LA CUENTA') + '</h2><ol>' + CUENTA.map((c, i) => {
+    const [a, b] = c.f, s = casi(fVal(a), fVal(b)) ? '=' : (fVal(a) > fVal(b) ? '&gt;' : '&lt;');
+    return '<li><span class="n">' + (i + 1) + '</span><div><div class="linea"><span class="fA">'
+      + fTxt(a) + '</span> ' + s + ' <span class="fB">' + fTxt(b) + '</span></div>'
+      + '<div class="regla-txt">' + T(c.r) + '</div></div></li>';
+  }).join('') + '</ol><div class="total">' + T('SEIS COMPARACIONES · TODAS EN LA MISMA REGLA') + '</div>';
+}
+
+document.getElementById('bSoltar').addEventListener('click', () => {
+  const c = cajas[activa];
+  c.grapas = new Array(c.cortes).fill(false); c.sel.clear(); c.recien.clear();
+  pinta(); lee();
+});
+document.getElementById('bLimpiar').addEventListener('click', monta);
+addEventListener('resize', () => pintaRegla());
+
+/* ── LOS DOS MANDOS DE LA BARRA ── */
+{
+  const so = document.getElementById('sonido');
+  const pintaSo = () => { so.textContent = T(Ruido.on ? 'Sonido: sí' : 'Sonido: no');
+                          so.setAttribute('aria-pressed', String(Ruido.on)); };
+  so.addEventListener('click', () => { Ruido.on = !Ruido.on; Ruido.despierta(); pintaSo(); });
+  document.addEventListener('pointerdown', () => Ruido.despierta(), {once:true});
+  const le = document.getElementById('lengua');
+  le.addEventListener('click', () => {
+    idioma = idioma === 'es' ? 'va' : 'es';
+    le.textContent = idioma === 'es' ? 'Valencià' : 'Castellano'; le.lang = idioma === 'es' ? 'ca' : 'es';
+    traduce(); pintaSo();
+    /* se repinta lo que haya en pantalla sin tocar el estado del pedido */
+    pintaCharla(); pinta(); lee();
+    if(resuelto){ pintaCharla(T(PEDIDOS[pedido].ok), true); if(pedido === PEDIDOS.length - 1) pintaCuenta(); }
+    const fila = document.getElementById('filaResp');
+    if(fila.dataset.puesta && !resuelto){ delete fila.dataset.puesta; fila.innerHTML = ''; revisa(); }
+    if(resuelto) siguiente();
+    if(PEDIDOS[pedido].telefono && !papel){ fila.innerHTML = ''; const bt = document.createElement('button');
+      bt.className = 'b acc'; bt.textContent = T('Cortar sobre el papel');
+      bt.addEventListener('click', () => { papel = true; Ruido.corte(); lee(); ponPregunta(PEDIDOS[pedido]); });
+      fila.appendChild(bt); }
+  });
+}
+traduce();
+monta();
+
+/* ═══ EL DICCIONARI. Cada frase del guió, en valencià, amb la seua castellana
+   per clau. Es genera a part (extrae_pz.js + va_pz.txt) i s'enganxa ací. ═══ */
+Object.assign(VA, {
+"—Perdone… yo la quería <b>en mitades</b>, no en cuartos. ¿Y ahora qué me llevo?": "—Perdone… jo la volia <b>en mitats</b>, no en quarts. I ara què m'enduc?",
+"—Que es lo mismo, hombre. Espere, que saco la grapadora.": "—Que és el mateix, home. Espere, que trac la grapadora.",
+"Toca dos cuartos PEGADOS y dale a Grapar.": "Toca dos quarts APEGATS i dona-li a Grapar.",
+"—Ah, pues sí que es media. Dos cuartos grapados ocupan lo mismo que una mitad: <b>2/4 y 1/2 son la misma cantidad</b>. Y mire la regla: la marca no se ha movido.": "—Ah, doncs sí que és mitja. Dos quarts grapats ocupen el mateix que una mitat: <b>2/4 i 1/2 són la mateixa quantitat</b>. I mire la regla: la marca no s'ha mogut.",
+"Suman media, sí. Pero el cliente quiere UNA pieza: grápalas.": "Sumen mitja, sí. Però el client vol UNA peça: grapa-les.",
+"—Yo quiero <b>tres octavos</b>. Y no me diga que no, que lo pone en la carta.": "—Jo vull <b>tres huitens</b>. I no em diga que no, que ho posa en la carta.",
+"—Está cortada en cuartos, pero el cortador vuelve a pasar cuando haga falta. Lo que esté grapado, aguanta.": "—Està tallada en quarts, però el tallador torna a passar quan fa falta. El que estiga grapat, aguanta.",
+"Vuelve a cortar en 8 y quédate con tres trozos.": "Torna a tallar en 8 i queda't amb tres trossos.",
+"—Tres de ocho, ni uno más. Y fíjese: al cortar más fino, lo que ya estaba grapado <b>no se ha movido de sitio</b>, solo ha cambiado de nombre.": "—Tres de huit, ni un més. I fixe's: en tallar més fi, el que ja estava grapat <b>no s'ha mogut de lloc</b>, només ha canviat de nom.",
+"—Somos cinco. Póngame <b>cinco cuartos</b>… si es que eso existe.": "—Som cinc. Pose'm <b>cinc quarts</b>… si és que això existix.",
+"—Existe, pero no cabe en una caja. Traigo otra.": "—Existix, però no cap en una caixa. Porte una altra.",
+"Una pizza entera Y un cuarto de la segunda: usa las dos cajas.": "Una pizza sencera I un quart de la segona: usa les dos caixes.",
+"—Claro que existe: una pizza entera y un cuarto. Cuando el de arriba pasa al de abajo hace falta <b>más de una unidad</b>, y en la regla se ve pasado el 1.": "—Clar que existix: una pizza sencera i un quart. Quan el de dalt passa al de baix fa falta <b>més d'una unitat</b>, i en la regla es veu passat l'1.",
+"—Un <b>tercio</b> de pizza, por favor. Pero la veo cortada en seis…": "—Un <b>terç</b> de pizza, per favor. Però la veig tallada en sis…",
+"—Seis sextos, sí. Grapo de dos en dos y le quedan tercios; es la máquina grande, la que pasa por toda la pizza.": "—Sis sisens, sí. Grape de dos en dos i li queden terços; és la màquina gran, la que passa per tota la pizza.",
+"Usa la grapadora industrial DE 2 EN 2 y coge una pieza.": "Usa la grapadora industrial DE 2 EN 2 i agafa una peça.",
+"—Un tercio. Y fíjese en lo que ha pasado: grapando de dos en dos, 2/6 se ha convertido en 1/3. <b>Ha dividido arriba y abajo entre 2</b>.": "—Un terç. I fixe's en el que ha passat: grapant de dos en dos, 2/6 s'ha convertit en 1/3. <b>Ha dividit dalt i baix entre 2</b>.",
+"Dos sextos sueltos suman lo mismo, pero un tercio es UNA pieza: grapa de 2 en 2.": "Dos sisens solts sumen el mateix, però un terç és UNA peça: grapa de 2 en 2.",
+"—Quiero <b>media pizza y un cuarto</b>. Todo junto, en una pieza si puede ser.": "—Vull <b>mitja pizza i un quart</b>. Tot junt, en una peça si pot ser.",
+"—Media y un cuarto no se grapan: no son del mismo tamaño. Ponga las dos en cuartos y verá qué fácil.": "—Mitja i un quart no es grapen: no són de la mateixa grandària. Pose les dos en quarts i veurà que fàcil.",
+"Media pizza son dos cuartos: junta tres cuartos en total.": "Mitja pizza són dos quarts: ajunta tres quarts en total.",
+"—Tres cuartos. Para juntar dos trozos hay que <b>cortarlos igual</b> primero: eso de buscar el mismo denominador no es un capricho, es poder graparlos.": "—Tres quarts. Per a ajuntar dos trossos cal <b>tallar-los igual</b> primer: això de buscar el mateix denominador no és un caprici, és poder grapar-los.",
+"—Mesa 4 quiere <b>tres octavos</b>; mesa 7, <b style=\"color:var(--azul)\">cinco octavos</b>. ¿Quién se lleva más?": "—Taula 4 vol <b>tres huitens</b>; taula 7, <b style=\"color:var(--azul)\">cinc huitens</b>. Qui se n'endú més?",
+"—Las dos cajas ya vienen en octavos: trozos IGUALES. Prepárelos y esto se cuenta solo.": "—Les dos caixes ja venen en huitens: trossos IGUALS. Prepare'ls i això es compta a soles.",
+"Prepara 3/8 para la mesa 4 y 5/8 para la mesa 7.": "Prepara 3/8 per a la taula 4 i 5/8 per a la taula 7.",
+"—Mesa 7, y de calle: cinco octavos contra tres. Con trozos iguales <b>basta contar los trozos</b>, y en la regla se ve la diferencia: dos octavos.": "—Taula 7, i de bon tros: cinc huitens contra tres. Amb trossos iguals <b>basta comptar els trossos</b>, i en la regla es veu la diferència: dos huitens.",
+"Trozos iguales: cuenta cuántos se lleva cada mesa, o mira quién cae más a la derecha.": "Trossos iguals: compta quants se n'endú cada taula, o mira qui cau més a la dreta.",
+"—¿Tres trozos más que cinco? Son octavos los dos, del mismo tamaño exacto. Ahí no hay discusión posible: gana quien tenga más trozos.": "—Tres trossos més que cinc? Són huitens els dos, de la mateixa grandària exacta. Ací no hi ha discussió possible: guanya qui tinga més trossos.",
+"—Iguales no: mire la regla, las dos marcas están en sitios distintos. Cuente los octavos de cada caja.": "—Iguals no: mire la regla, les dos marques estan en llocs distints. Compte els huitens de cada caixa.",
+"MESA 4": "TAULA 4",
+"MESA 7": "TAULA 7",
+"—Mesa 4 pide <b>un tercio</b> y mesa 7 <b style=\"color:var(--azul)\">un cuarto</b>, y discuten: que si 4 es más que 3, que si el cuarto gana…": "—Taula 4 demana <b>un terç</b> i taula 7 <b style=\"color:var(--azul)\">un quart</b>, i discutixen: que si 4 és més que 3, que si el quart guanya…",
+"—Más comensales tocan a menos, se lo digo yo. Pero prepárelo, que verlo es gratis.": "—Més comensals toquen a menys, li ho dic jo. Però prepare-ho, que vore-ho és gratis.",
+"Un trozo en cada caja: 1/3 y 1/4. Mira el tamaño de cada uno.": "Un tros en cada caixa: 1/3 i 1/4. Mira la grandària de cada un.",
+"—El del tercio. Cuantas MÁS partes se hace una pizza, más pequeño toca cada trozo: por eso <b>1/4 &lt; 1/3 aunque 4 &gt; 3</b>. Y si alguien protesta, córtelas las dos en 12 y cuente: 4/12 contra 3/12.": "—El del terç. Quantes MÉS parts es fa una pizza, més xicotet toca cada tros: per això <b>1/4 &lt; 1/3 encara que 4 &gt; 3</b>. I si algú protesta, talle-les les dos en 12 i compte: 4/12 contra 3/12.",
+"Que 4 sea más que 3 no ayuda: más partes tocan a MENOS. Mira el tamaño de cada trozo.": "Que 4 siga més que 3 no ajuda: més parts toquen a MENYS. Mira la grandària de cada tros.",
+"—Ya sé lo que ha pensado: que 4 es más que 3. Pero ese número dice <b>en cuántas partes se corta la pizza</b>, no cuánto toca. Más comensales, menos ración. Míreles el tamaño a los dos trozos.": "—Ja sé el que ha pensat: que 4 és més que 3. Però eixe número diu <b>en quantes parts es talla la pizza</b>, no quant toca. Més comensals, menys ració. Mire'ls la grandària als dos trossos.",
+"—¿Iguales? Ponga un trozo encima del otro. El de la mesa 4 sobra por todas partes.": "—Iguals? Pose un tros damunt de l'altre. El de la taula 4 sobra per tots els costats.",
+"—Mesa 4, <b>tres cuartos</b>; mesa 7, <b style=\"color:var(--azul)\">cinco octavos</b>. Y va apuesta.": "—Taula 4, <b>tres quarts</b>; taula 7, <b style=\"color:var(--azul)\">cinc huitens</b>. I va aposta.",
+"—Cuartos contra octavos: trozos distintos, y con trozos distintos no hay cuenta que valga. Pero los cuartos se dejan recortar: pase el cortador por UNA caja y quedan igualadas.": "—Quarts contra huitens: trossos distints, i amb trossos distints no hi ha compte que valga. Però els quarts es deixen retallar: passe el tallador per UNA caixa i queden igualades.",
+"Corta la de cuartos en 8: 3/4 pasará a llamarse 6/8.": "Talla la de quarts en 8: 3/4 passarà a dir-se 6/8.",
+"—Mesa 4: seis octavos contra cinco. Bastaba recortar UNA caja, porque los cuartos caben justos en los octavos. <b>Un octavo de diferencia</b>, para ser exactos.": "—Taula 4: sis huitens contra cinc. Bastava retallar UNA caixa, perquè els quarts caben justos en els huitens. <b>Un huité de diferència</b>, per a ser exactes.",
+"Ahora los trozos son iguales: cuenta, o mira quién cae más a la derecha.": "Ara els trossos són iguals: compta, o mira qui cau més a la dreta.",
+"—Cinco trozos contra tres, sí. Pero de distinto tamaño: <b>un octavo es la mitad de un cuarto</b>. Contar trozos que no miden lo mismo no vale para nada. Iguálelos y volvemos a hablar.": "—Cinc trossos contra tres, sí. Però de distinta grandària: <b>un huité és la mitat d'un quart</b>. Comptar trossos que no mesuren el mateix no val per a res. Iguale'ls i tornem a parlar.",
+"—No caen en el mismo punto. Póngalas en octavos las dos y lo verá.": "—No cauen en el mateix punt. Pose-les en huitens les dos i ho veurà.",
+"—Mesa 4 quiere <b>dos tercios</b> y mesa 7 quiere <b style=\"color:var(--azul)\">tres quintos</b>. ¿Quién se lleva más pizza?": "—Taula 4 vol <b>dos terços</b> i taula 7 vol <b style=\"color:var(--azul)\">tres quints</b>. Qui se n'endú més pizza?",
+"—Tercios y quintos: ni unos caben en los otros ni al revés. Aquí toca cortar LAS DOS… y hay un número de trozos donde caben los dos cortes.": "—Terços i quints: ni uns caben en els altres ni al revés. Ací toca tallar LES DOS… i hi ha un nombre de trossos on caben els dos talls.",
+"Ni 3 cabe en 5 ni 5 en 3: busca un corte donde quepan LOS DOS.": "Ni 3 cap en 5 ni 5 en 3: busca un tall on càpien ELS DOS.",
+"—Mesa 4, por un pelo: diez quinceavos contra nueve. Ponerlas en la MISMA secuencia de trozos: eso —y no otra cosa— es <b>el denominador común</b>. Diferencia: un quinceavo.": "—Taula 4, per un pèl: deu quinzens contra nou. Posar-les en la MATEIXA seqüència de trossos: això —i no una altra cosa— és <b>el denominador comú</b>. Diferència: un quinzé.",
+"Ahora los trozos son iguales: cuenta quinceavos, o mira quién cae más a la derecha.": "Ara els trossos són iguals: compta quinzens, o mira qui cau més a la dreta.",
+"—Ya veo el razonamiento: 3 es más que 2 y 5 es más que 3, así que gana. Pues eso mismo pasaba hace dos pedidos con 1/3 y 1/4 —el 4 era mayor que el 3— y <b>ganaba el tercio</b>. Con trozos distintos, contar no sirve. Iguálelos.": "—Ja veig el raonament: 3 és més que 2 i 5 és més que 3, així que guanya. Doncs això mateix passava fa dos comandes amb 1/3 i 1/4 —el 4 era major que el 3— i <b>guanyava el terç</b>. Amb trossos distints, comptar no servix. Iguale'ls.",
+"—Iguales no, pero por poco: un solo quinceavo los separa. Córtelas las dos y cuente.": "—Iguals no, però per poc: un sol quinzé els separa. Talle-les les dos i compte.",
+"—Mesa 4 pide <b>dos cuartos</b>; mesa 7, <b style=\"color:var(--azul)\">tres sextos</b>. Se han jugado un café.": "—Taula 4 demana <b>dos quarts</b>; taula 7, <b style=\"color:var(--azul)\">tres sisens</b>. S'han jugat un café.",
+"—Pues alguien va a pagar dos cafés. Córtelas igual y se acaba la apuesta.": "—Doncs algú pagarà dos cafés. Talle-les igual i s'acaba l'aposta.",
+"Prepara 2/4 y 3/6, córtalas igual… y mira las marcas.": "Prepara 2/4 i 3/6, talla-les igual… i mira les marques.",
+"—Nadie paga el café: 6/12 y 6/12, <b>el MISMO punto de la regla con dos nombres</b>. Comparar también puede acabar en empate.": "—Ningú paga el café: 6/12 i 6/12, <b>el MATEIX punt de la regla amb dos noms</b>. Comparar també pot acabar en empat.",
+"Mira las dos marcas de la regla. Fíjate bien…": "Mira les dos marques de la regla. Fixa't bé…",
+"—¿Seguro? Córtelas las dos igual y míreme las marcas de la regla antes de contestar.": "—Segur? Talle-les les dos igual i mire'm les marques de la regla abans de contestar.",
+"—¿Porque 3 es más que 2? Pero también 6 es más que 4. Córtelas igual y verá la sorpresa.": "—Perquè 3 és més que 2? Però també 6 és més que 4. Talle-les igual i veurà la sorpresa.",
+"—(Al teléfono) Dos encargos para recoger: <b>siete octavos</b> para mí y <b style=\"color:var(--azul)\">seis séptimos</b> para mi hermano, que jura que lo suyo es más. ¿Quién tiene razón?": "—(Al telèfon) Dos encàrrecs per a recollir: <b>set huitens</b> per a mi i <b style=\"color:var(--azul)\">sis setens</b> per al meu germà, que jura que el seu és més. Qui té raó?",
+"—¿Octavos contra séptimos? Harían falta 56 trozos y el cortador de la casa no hila tan fino. Esto se resuelve en el papel, que ahí el filo no se despunta.": "—Huitens contra setens? Farien falta 56 trossos i el tallador de la casa no fila tan fi. Això es resol en el paper, que ací el tall no s'esmussa.",
+"Aquí no hay pizza que valga: dale a cortar sobre el papel.": "Ací no hi ha pizza que valga: dona-li a tallar sobre el paper.",
+"—El de 7/8, por un trozo de 56: 49 contra 48. Y fíjese en los números: <b>49 = 7×7 y 48 = 8×6</b>. Ha multiplicado EN CRUZ sin querer; la regla famosa no es un truco, es este corte sobre el papel.": "—El de 7/8, per un tros de 56: 49 contra 48. I fixe's en els números: <b>49 = 7×7 i 48 = 8×6</b>. Ha multiplicat EN CREU sense voler; la regla famosa no és un truc, és este tall sobre el paper.",
+"En la secuencia de 56: ¿quién va más lejos, el 49 o el 48?": "En la seqüència de 56: qui va més lluny, el 49 o el 48?",
+"—Su hermano dice lo mismo, y por lo mismo: que a 6/7 le falta un séptimo y a 7/8 un octavo. Pero <b>al que le falta menos, se lleva más</b>, y un octavo es más pequeño que un séptimo. En la secuencia de 56: 48 trozos contra 49.": "—El seu germà diu el mateix, i pel mateix: que a 6/7 li falta un seté i a 7/8 un huité. Però <b>al que li falta menys, se n'endú més</b>, i un huité és més xicotet que un seté. En la seqüència de 56: 48 trossos contra 49.",
+"—Ni hablar: 49 y 48 no son el mismo número, por muy cerca que anden.": "—Ni parlar-ne: 49 i 48 no són el mateix número, per molt a prop que vagen.",
+"Con los mismos trozos basta contar trozos: gana el numerador.": "Amb els mateixos trossos basta comptar trossos: guanya el numerador.",
+"Con el mismo numerador, más partes tocan a menos: gana el denominador pequeño.": "Amb el mateix numerador, més parts toquen a menys: guanya el denominador xicotet.",
+"Si un corte cabe en el otro, se recorta una sola caja: 3/4 = 6/8.": "Si un tall cap en l'altre, es retalla una sola caixa: 3/4 = 6/8.",
+"Si ninguno cabe, se cortan las dos donde quepan ambos: el denominador común (15).": "Si cap dels dos cap en l'altre, es tallen les dos on càpien tots dos: el denominador comú (15).",
+"Dos nombres pueden ser el mismo punto: 6/12 y 6/12. Comparar puede acabar en empate.": "Dos noms poden ser el mateix punt: 6/12 i 6/12. Comparar pot acabar en empat.",
+"Cuando el cortador no llega, se corta sobre el papel: 49 y 48 son los productos en cruz.": "Quan el tallador no arriba, es talla sobre el paper: 49 i 48 són els productes en creu.",
+"← La ciudad": "← La ciutat",
+"TODAS LAS PIZZAS DE LA CASA MIDEN LO MISMO · UNA ENTERA = 1": "TOTES LES PIZZES DE LA CASA MESUREN EL MATEIX · UNA SENCERA = 1",
+"cortar en": "tallar en",
+"grapar toda la pizza": "grapar tota la pizza",
+"Grapar lo elegido": "Grapar el triat",
+"Quitar grapas": "Llevar grapes",
+"Empezar de nuevo": "Començar de nou",
+"TIQUE": "TIQUET",
+"El 1 es la superficie de una pizza entera de la casa.<br>La pizza es el envase; el número vive en la regla.": "L'1 és la superfície d'una pizza sencera de la casa.<br>La pizza és l'envàs; el número viu en la regla.",
+"CAJA ": "CAIXA ",
+" · EN ": " · EN ",
+"de ": "de ",
+" en ": " en ",
+"La máquina grande une la pizza ENTERA de ": "La màquina gran unix la pizza SENCERA de ",
+": tus ": ": els teus ",
+" no llenaban piezas enteras, así que te llevas las piezas que los contienen. Aquí no hay división que enseñar.": " no omplien peces senceres, així que t'endús les peces que els contenen. Ací no hi ha divisió que ensenyar.",
+"De ": "De ",
+" a ": " a ",
+" el cortador <b>no respeta las piezas</b>: se pierde lo grapado y lo elegido. Toca otra vez para cortar de cero.": " el tallador <b>no respecta les peces</b>: es perd el grapat i el triat. Toca una altra vegada per a tallar de zero.",
+"MISMOS TROZOS · SE PUEDE COMPARAR": "MATEIXOS TROSSOS · ES POT COMPARAR",
+"FRENTE A": "DAVANT DE",
+"Mismo numerador también: el MISMO punto con dos nombres.": "Mateix numerador també: el MATEIX punt amb dos noms.",
+"Misma secuencia de ": "Mateixa seqüència de ",
+": gana el numerador mayor.": ": guanya el numerador major.",
+"ENCARGO POR TELÉFONO": "ENCÀRREC PER TELÈFON",
+"Octavos contra séptimos: harían falta 56 trozos. Se corta sobre el papel.": "Huitens contra setens: farien falta 56 trossos. Es talla sobre el paper.",
+"CORTADO SOBRE EL PAPEL · ARRIBA Y ABAJO": "TALLAT SOBRE EL PAPER · DALT I BAIX",
+"LLEVAS EN LA MESA": "PORTES EN LA TAULA",
+"CAJA 1": "CAIXA 1",
+"CAJA 2": "CAIXA 2",
+"EN TOTAL": "EN TOTAL",
+"Trozos iguales: se juntan. ": "Trossos iguals: s'ajunten. ",
+", más de una pizza entera.": ", més d'una pizza sencera.",
+"Una caja en ": "Una caixa en ",
+" y otra en ": " i una altra en ",
+": trozos distintos no se juntan. Pásales el MISMO cortador.": ": trossos distints no s'ajunten. Passa'ls el MATEIX tallador.",
+"LLEVAS EN LA CAJA": "PORTES EN LA CAIXA",
+"Cortar en ": "Tallar en ",
+" multiplica arriba y abajo por ": " multiplica dalt i baix per ",
+"Grapar de ": "Grapar de ",
+" divide arriba y abajo entre ": " dividix dalt i baix entre ",
+"LA PIZARRA DE NICK": "LA PISSARRA DE NICK",
+"SIN CORTAR NADA TODAVÍA: ¿QUÉ SE APUESTA?": "SENSE TALLAR RES ENCARA: QUÈ S'APOSTA?",
+" frente a ": " davant de ",
+"Toca las porciones que te llevas.": "Toca les porcions que t'endús.",
+"Te llevas ": "T'endús ",
+"La pizza está en ": "La pizza està en ",
+" partes iguales: has dividido arriba y abajo entre ": " parts iguals: has dividit dalt i baix entre ",
+"de pizza.": "de pizza.",
+" · más de una pizza entera": " · més d'una pizza sencera",
+"y": "i",
+"Trozos distintos: todavía no se juntan. Pásales el <b>mismo cortador</b>.": "Trossos distints: encara no s'ajunten. Passa'ls el <b>mateix tallador</b>.",
+"PEDIDO": "COMANDA",
+"DE": "DE",
+"NICK, EL PIZZERO": "NICK, EL PIZZER",
+"¿quién se lleva más?": "qui se n'endú més?",
+"El de ": "El de ",
+"Los dos igual": "Els dos igual",
+"Y lo que apuntó en la pizarra iba bien encaminado. ": "I el que va apuntar en la pissarra anava ben encaminat. ",
+"La pizarra decía otra cosa, ¿eh? Por algo se cuenta antes de cobrar. ": "La pissarra deia una altra cosa, eh? Per alguna cosa es compta abans de cobrar. ",
+"Los dos pedidos están listos: ahora pásales el MISMO cortador. Con trozos distintos no hay cuenta que valga.": "Les dos comandes estan llestes: ara passa'ls el MATEIX tallador. Amb trossos distints no hi ha compte que valga.",
+"· SERVICIO TERMINADO · NICK INVITA AL CAFÉ ·": "· SERVICI ACABAT · NICK CONVIDA AL CAFÉ ·",
+"Siguiente pedido →": "Següent comanda →",
+"Cortar sobre el papel": "Tallar sobre el paper",
+"La grapadora necesita dos piezas o más, y pegadas.": "La grapadora necessita dos peces o més, i apegades.",
+"Esas piezas no están pegadas: sueltas suman lo mismo, pero no forman una.": "Eixes peces no estan apegades: soltes sumen el mateix, però no en formen una.",
+"Una pieza de ": "Una peça de ",
+"… pero ": "… però ",
+" no cabe en ": " no cap en ",
+": esa pieza no es 1 de nada entero, y por eso aquí no hay división que enseñar.": ": eixa peça no és 1 de res sencer, i per això ací no hi ha divisió que ensenyar.",
+"LA CUENTA": "EL COMPTE",
+"SEIS COMPARACIONES · TODAS EN LA MISMA REGLA": "SIS COMPARACIONS · TOTES EN LA MATEIXA REGLA",
+"Los números comparados —49 y 48— son los productos EN CRUZ: la regla de multiplicar en cruz es exactamente este corte sobre el papel.": "Els números comparats —49 i 48— són els productes EN CREU: la regla de multiplicar en creu és exactament este tall sobre el paper.",
+"Ya están en la misma secuencia de 56: ahora sí se comparan.": "Ja estan en la mateixa seqüència de 56: ara sí que es comparen.",
+"HAS CORTADO": "HAS TALLAT",
+"HAS GRAPADO": "HAS GRAPAT",
+"Misma secuencia de 56: ahora sí se comparan.": "Mateixa seqüència de 56: ara sí que es comparen.",
+"Encargo doble: el cortador no llega a 56. Se corta sobre el papel.": "Encàrrec doble: el tallador no arriba a 56. Es talla sobre el paper.",
+"Dos pedidos distintos: no se suman, se comparan.": "Dos comandes distintes: no se sumen, es comparen.",
+"Prepara los dos pedidos, uno en cada caja.": "Prepara les dos comandes, una en cada caixa.",
+"AL TELÉFONO": "AL TELÈFON",
+"CLIENTE": "CLIENT",
+"Sonido: sí": "So: sí",
+"Sonido: no": "So: no",
+"LA APUESTA AGUANTÓ": "L'APOSTA VA AGUANTAR",
+"LA APUESTA NO AGUANTÓ": "L'APOSTA NO VA AGUANTAR",
+"ESO DICE LA PIZARRA. LA CUENTA LO DIRÁ.": "AIXÒ DIU LA PISSARRA. EL COMPTE HO DIRÀ.",
+"Mira la regla: se lleva más el que cae más a la derecha.": "Mira la regla: se n'endú més el que cau més a la dreta."
+});
+</script>
+</body></html>
