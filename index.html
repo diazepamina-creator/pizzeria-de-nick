@@ -148,6 +148,9 @@ body{margin:0;background:var(--mesa);color:var(--tinta);font-family:Nunito,syste
   color:var(--tinta);box-shadow:0 2px 0 #DCCFB4}
 .barra a.b:hover{border-color:var(--tomate)}
 .barra .etq{font-size:10.5px}
+/* el botón de empezar de cero, una vez armado: rojo de toldo, que aquí es
+   el color de «cuidado con lo que vas a tocar» */
+.barra .b.armado{border-color:var(--tomate);color:var(--tomate);box-shadow:0 2px 0 var(--tomate)}
 
 /* NICK VIVE. Parpadea cada pocos segundos, da un saltito cuando el pedido
    sale redondo y, al grapar, el brazo de la grapadora baja y sube: un
@@ -365,6 +368,7 @@ button.b.avisa{background:#C87A28;color:#fff;border-color:#9A5C1B;border-style:s
     <span style="flex:1"></span>
     <button class="b" id="lengua" lang="ca">Valencià</button>
     <button class="b" id="sonido">Sonido: sí</button>
+    <button class="b" id="cero" hidden>Empezar de cero</button>
   </div>
   <div class="toldo">
     <div class="placa">
@@ -581,6 +585,37 @@ let resuelto = false;   // la comparación del pedido ya está contestada
 let papel = false;      // el encargo por teléfono ya se ha cortado sobre el papel
 let armado = null;      // {caja, n}: corte destructivo avisado, a un toque de caer
 const nuevaCaja = c => ({cortes:c, grapas:new Array(c).fill(false), sel:new Set(), recien:new Set()});
+
+/* ── EL TURNO. Una tablet que se bloquea a mitad de clase, un alumno que
+      recarga sin querer y los once pedidos volvían a empezar. Ahora el
+      mostrador se guarda en el propio aparato —sin servidor y sin cuentas,
+      como todo lo demás— y CADUCA A LAS CUATRO HORAS: en un ordenador
+      compartido, el de la clase siguiente no hereda el pedido del anterior.
+
+      Se guarda EN QUÉ PEDIDO se estaba, no cómo estaba cortada la pizza. Un
+      pedido a medias se rehace en tres toques; los siete pedidos de antes,
+      no. Y así lo que se restaura es siempre un mostrador limpio, que es lo
+      que el alumno espera ver cuando vuelve.                             */
+const GUARDADO = 'pz.turno.v1';
+const CADUCA = 4*60*60*1000;
+
+function guardaTurno(){
+  try{
+    localStorage.setItem(GUARDADO, JSON.stringify({
+      v:1, ts:Date.now(), pedido:pedido, idioma:idioma, sonido:Ruido.on
+    }));
+  }catch(e){ /* sin almacén disponible: se sigue igual, sin guardar */ }
+}
+function leeTurno(){
+  try{
+    const d = JSON.parse(localStorage.getItem(GUARDADO) || 'null');
+    if(!d || d.v !== 1) return null;
+    if(!(d.pedido >= 0 && d.pedido < PEDIDOS.length)) return null;
+    if(Date.now() - d.ts > CADUCA){ borraTurno(); return null; }
+    return d;
+  }catch(e){ return null; }
+}
+function borraTurno(){ try{ localStorage.removeItem(GUARDADO); }catch(e){} }
 
 const fVal = f => f[0] / f[1];
 const fTxt = f => f[0] + '/' + f[1];
@@ -1499,7 +1534,7 @@ function siguiente(){
   }
   const bt = document.createElement('button');
   bt.className = 'b verde'; bt.id = 'bSig'; bt.textContent = T('Siguiente pedido →');
-  bt.addEventListener('click', () => { pedido++; monta(); });
+  bt.addEventListener('click', () => { pedido++; guardaTurno(); monta(); });
   fila.appendChild(bt);
 }
 function monta(){
@@ -1513,7 +1548,7 @@ function monta(){
   document.getElementById('mesa').style.display = tel ? 'none' : 'flex';
   ['filaCortes', 'filaInd', 'filaBotones'].forEach(id =>
     document.getElementById(id).style.display = tel ? 'none' : 'flex');
-  pintaPasos(); pintaCharla();
+  pintaPasos(); pintaCharla(); pintaCero();
   if(tel){
     Ruido.timbre();
     const bt = document.createElement('button');
@@ -1605,18 +1640,19 @@ document.getElementById('bSoltar').addEventListener('click', () => {
 document.getElementById('bLimpiar').addEventListener('click', monta);
 addEventListener('resize', () => pintaRegla());
 
-/* ── LOS DOS MANDOS DE LA BARRA ── */
+/* ── LOS MANDOS DE LA BARRA ── */
+let pintaCero = () => {};
 {
   const so = document.getElementById('sonido');
   const pintaSo = () => { so.textContent = T(Ruido.on ? 'Sonido: sí' : 'Sonido: no');
                           so.setAttribute('aria-pressed', String(Ruido.on)); };
-  so.addEventListener('click', () => { Ruido.on = !Ruido.on; Ruido.despierta(); pintaSo(); });
+  so.addEventListener('click', () => { Ruido.on = !Ruido.on; Ruido.despierta(); pintaSo(); guardaTurno(); });
   document.addEventListener('pointerdown', () => Ruido.despierta(), {once:true});
   const le = document.getElementById('lengua');
   le.addEventListener('click', () => {
     idioma = idioma === 'es' ? 'va' : 'es';
     le.textContent = idioma === 'es' ? 'Valencià' : 'Castellano'; le.lang = idioma === 'es' ? 'ca' : 'es';
-    traduce(); pintaSo();
+    traduce(); pintaSo(); pintaCero(); guardaTurno();
     /* se repinta lo que haya en pantalla sin tocar el estado del pedido */
     pintaCharla(); pinta(); lee();
     if(resuelto){ pintaCharla(T(PEDIDOS[pedido].ok), true); if(pedido === PEDIDOS.length - 1) pintaCuenta(); }
@@ -1628,13 +1664,55 @@ addEventListener('resize', () => pintaRegla());
       bt.addEventListener('click', () => { papel = true; Ruido.corte(); lee(); ponPregunta(PEDIDOS[pedido]); });
       fila.appendChild(bt); }
   });
+  /* EMPEZAR DE CERO. Solo asoma cuando hay algo que borrar: en el primer
+     pedido no hay turno que perder y el botón sobra en la barra. Y borra a
+     la SEGUNDA pulsación, como en la terminal: el primer toque arma el botón
+     y lo desarma solo a los cinco segundos, así que un dedo despistado sobre
+     la barra no se lleva por delante el trabajo de media clase. */
+  const ce = document.getElementById('cero');
+  let armadoCero = false, relojCero = 0;
+  const desarmaCero = () => { armadoCero = false; clearTimeout(relojCero);
+                              ce.classList.remove('armado'); pintaCero(); };
+  pintaCero = () => { ce.hidden = pedido === 0 && !armadoCero;
+                      ce.textContent = T(armadoCero ? 'Pulsa otra vez para borrarlo'
+                                                    : 'Empezar de cero'); };
+  ce.addEventListener('click', () => {
+    if(!armadoCero){
+      armadoCero = true; ce.classList.add('armado'); pintaCero();
+      clearTimeout(relojCero); relojCero = setTimeout(desarmaCero, 5000);
+      return;
+    }
+    /* se recarga, como en la terminal: así el mostrador queda igual que
+       recién abierto —idioma y sonido incluidos— y no a medio camino. */
+    desarmaCero(); borraTurno(); location.reload();
+  });
 }
-traduce();
-monta();
+
+/* ── LA APERTURA. Si el aparato guarda un turno de hace menos de cuatro
+      horas, se vuelve a él —con su idioma y su sonido—; si no, se abre el
+      mostrador por el primer pedido. ── */
+{
+  const d = leeTurno();
+  if(d){
+    pedido = d.pedido;
+    if(d.idioma === 'va'){
+      idioma = 'va';
+      const le = document.getElementById('lengua');
+      le.textContent = 'Castellano'; le.lang = 'es';
+    }
+    if(d.sonido === false) Ruido.on = false;
+  }
+  traduce();
+  document.getElementById('sonido').textContent = T(Ruido.on ? 'Sonido: sí' : 'Sonido: no');
+  document.getElementById('sonido').setAttribute('aria-pressed', String(Ruido.on));
+  monta();
+}
 
 /* ═══ EL DICCIONARI. Cada frase del guió, en valencià, amb la seua castellana
    per clau. Es genera a part (extrae_pz.js + va_pz.txt) i s'enganxa ací. ═══ */
 Object.assign(VA, {
+"Empezar de cero": "Començar de zero",
+"Pulsa otra vez para borrarlo": "Prem una altra vegada per a esborrar-ho",
 "—Perdone… yo la quería <b>en mitades</b>, no en cuartos. ¿Y ahora qué me llevo?": "—Perdone… jo la volia <b>en mitats</b>, no en quarts. I ara què m'enduc?",
 "—Que es lo mismo, hombre. Espere, que saco la grapadora.": "—Que és el mateix, home. Espere, que trac la grapadora.",
 "Toca dos cuartos PEGADOS y dale a Grapar.": "Toca dos quarts APEGATS i dona-li a Grapar.",
