@@ -1,7 +1,7 @@
 # Licencia
 
 **LA PIZZERÍA DE NICK**
-Manipulativo de fracciones y comparación para 2.º de ESO
+Manipulativo de fracciones y comparación para 1.º y 2.º de ESO
 
 © 2026 Andrés Asensio
 
@@ -36,7 +36,7 @@ permitido por la licencia.
 ## Cómo citar
 
 > Asensio, A. (2026). *La pizzería de Nick: manipulativo de fracciones y
-> comparación para 2.º de ESO* [Aplicación web]. CC BY-NC-SA 4.0.
+> comparación para 1.º y 2.º de ESO* [Aplicación web]. CC BY-NC-SA 4.0.
 
 ## Tipografías
 
