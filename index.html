@@ -361,6 +361,23 @@ button.b.avisa{background:#C87A28;color:#fff;border-color:#9A5C1B;border-style:s
   .pizarra .fA{color:var(--tomate)} .pizarra .fB{color:var(--azul)}
   .tique{-webkit-mask:none;mask:none;border:1px dashed #C9BB9E}
 }
+
+/* ── EL MODO AULA ───────────────────────────────────────────────────────
+   Para la pizarra digital. Todo un tercio más grande, que es lo que se nota
+   desde el fondo de la clase; y, si hay sitio, el enunciado a la izquierda y el
+   manipulativo a la derecha, para que se vean a la vez. El zoom escala a la vez letra, botones y
+   dibujos, así que no hay que tocar ni un tamaño suelto.                  */
+@media (min-width:900px){
+  body[data-aula="si"] .marco{zoom:1.32;max-width:1430px}
+}
+@media (min-width:1100px){
+  body[data-aula="si"] .aulaRejilla{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.06fr);
+    gap:0 16px;align-items:start}
+  body[data-aula="si"] .colIzq,
+  body[data-aula="si"] .colDer{display:block;min-width:0}
+}
+.aulaRejilla,.colIzq,.colDer{display:contents}
+#bAula[aria-pressed="true"]{background:var(--tomate);color:#fff;border-color:var(--tomate)}
 </style></head><body>
 <div class="marco">
   <div class="barra">
@@ -1874,5 +1891,46 @@ Object.assign(VA, {
 "ESO DICE LA PIZARRA. LA CUENTA LO DIRÁ.": "AIXÒ DIU LA PISSARRA. EL COMPTE HO DIRÀ.",
 "Mira la regla: se lleva más el que cae más a la derecha.": "Mira la regla: se n'endú més el que cau més a la dreta."
 });
+
+/* ── EL MODO AULA ───────────────────────────────────────────────────────
+   Se guarda en su propia llave del almacén, aparte del turno, para no tocar
+   el guardado de la app. La rejilla —cuando la hay— se monta envolviendo lo
+   que ya existe; fuera del modo aula los envoltorios son display:contents y
+   la página se lee en fila, como siempre.                                 */
+(function(){
+  const LLAVE = 'aula.v1';
+  const el = s => document.querySelector(s);
+  const IZQ = ["#charla", ".tique"], DER = ["#mesa", "#opera", "#pizarra", "#filaCortes", "#filaInd", "#filaBotones", "#filaResp"];
+  if(IZQ.length && DER.length){
+    const primero = el(IZQ[0]);
+    if(primero){
+      const rej = document.createElement('div'); rej.className = 'aulaRejilla';
+      const izq = document.createElement('div'); izq.className = 'colIzq';
+      const der = document.createElement('div'); der.className = 'colDer';
+      primero.parentNode.insertBefore(rej, primero);
+      rej.appendChild(izq); rej.appendChild(der);
+      IZQ.forEach(s => { const e = el(s); if(e) izq.appendChild(e); });
+      DER.forEach(s => { const e = el(s); if(e) der.appendChild(e); });
+    }
+  }
+  const b = document.createElement('button');
+  b.id = 'bAula'; b.type = 'button'; b.className = 'b'; b.setAttribute('aria-pressed', 'false');
+  const donde = el('.barra');
+  if(donde) donde.appendChild(b);
+  const pinta = () => {
+    const si = document.documentElement.dataset.aula === 'si';
+    document.body.dataset.aula = si ? 'si' : 'no';
+    b.setAttribute('aria-pressed', String(si));
+    b.textContent = si ? 'Salir del aula' : 'Aula';
+  };
+  b.addEventListener('click', () => {
+    const si = document.documentElement.dataset.aula !== 'si';
+    document.documentElement.dataset.aula = si ? 'si' : 'no';
+    try{ localStorage.setItem(LLAVE, si ? 'si' : 'no'); }catch(e){}
+    pinta();
+  });
+  try{ document.documentElement.dataset.aula = localStorage.getItem(LLAVE) === 'si' ? 'si' : 'no'; }catch(e){}
+  pinta();
+})();
 </script>
 </body></html>
